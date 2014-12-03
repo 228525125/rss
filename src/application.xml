@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	<import
+		resource="classpath:/com/easyjf/core/open-spring-transaction.xml" />
+	<import resource="classpath:/com/easyjf/core/jpa-generic-dao.xml" />
+	<import resource="dao.xml" />
+	<import resource="service.xml" />
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:db.properties</value>
+			</list>
+		</property>
+	</bean>
+	 
+	<bean id="dataSourceKingdee" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+		<property name="url" value="jdbc:sqlserver://192.168.1.200:1433;databaseName=AIS20091218114908"/>
+		<!-- <property name="url" value="jdbc:sqlserver://192.168.1.200:1433;databaseName=AIS20100305141036"/>  -->
+		<property name="username" value="sa"/>
+		<property name="password" value="123456"/>
+	</bean>
+	<!--   
+	<bean id="dataSourceKingdee" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+		<property name="url" value="jdbc:sqlserver://192.168.1.200:1433;databaseName=AIS20100305141036"/>
+		<property name="username" value="sa"/>
+		<property name="password" value="123456"/>
+	</bean>
+	 -->
+	
+	<bean id="dataSourceRss" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+		<property name="url" value="jdbc:sqlserver://192.168.1.200:1433;databaseName=rss"/>
+		<property name="username" value="sa"/>
+		<property name="password" value="123456"/>
+	</bean>
+	
+	<bean id="kingdeeDao" class="org.cx.rss.dao.impl.KingdeeDaoImpl">
+    	<property name="dataSource" ref="dataSourceKingdee"></property>
+    </bean>
+    
+    <bean id="JDBCQueryDao" class="org.cx.rss.dao.impl.JDBCQueryDaoImpl">
+    	<property name="dataSource" ref="dataSourceKingdee"></property>
+    </bean>
+    
+    <bean id="JDBCRssDao" class="org.cx.rss.dao.impl.JDBCRssDaoImpl">
+       <property name="dataSource" ref="dataSourceRss"></property>
+  	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<context:component-scan base-package="org.cx.rss"></context:component-scan>
+</beans>

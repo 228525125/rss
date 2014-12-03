@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">  
+  <bean id="workPlanService" class="org.cx.rss.service.impl.WorkPlanServiceImpl"> 
+    <property name="workPlanDao" ref="workPlanDao"/> 
+  </bean>
+  <bean id="userService" class="org.cx.rss.service.impl.UserServiceImpl"> 
+    <property name="userDao" ref="userDao"/> 
+  </bean>
+  <bean id="maxidService" class="org.cx.rss.service.impl.MaxidServiceImpl"> 
+    <property name="maxidDao" ref="maxidDao"/> 
+  </bean>
+  <bean id="taskPlanService" class="org.cx.rss.service.impl.TaskPlanServiceImpl"> 
+    <property name="taskPlanDao" ref="taskPlanDao"/> 
+  </bean>
+  <bean id="equipmentService" class="org.cx.rss.service.impl.EquipmentServiceImpl">
+  	<property name="equipmentDao" ref="equipmentDao" /> 
+  </bean>
+  <bean id="moduleService" class="org.cx.rss.service.impl.ModuleServiceImpl"> 
+    <property name="moduleDao" ref="moduleDao"/> 
+  </bean>  
+  <bean id="operateLimitService" class="org.cx.rss.service.impl.OperateLimitServiceImpl"> 
+    <property name="operateLimitDao" ref="operateLimitDao"/> 
+  </bean>  
+  <bean id="roleService" class="org.cx.rss.service.impl.RoleServiceImpl"> 
+    <property name="roleDao" ref="roleDao"/> 
+  </bean>
+  <bean id="fileClassService" class="org.cx.rss.service.impl.FileClassServiceImpl"> 
+    <property name="fileClassDao" ref="fileClassDao"/> 
+  </bean>
+</beans>

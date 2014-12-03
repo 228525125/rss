@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<Meta http-equiv="Refresh" Content="5; Url=kingdee.do?cmd=task">
+<title></title>
+<style type="text/css">
+a{TEXT-DECORATION:none}
+</style>
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><font face="新宋体" style="font-weight:bold;font-size: 12px;">工作流审批</font></td>
+	</tr>
+	<tr><td>&nbsp;</td></tr>
+	#if(0!=$cgsq)
+	<tr>
+		<td><font face="新宋体" style="font-size: 12px;">采购申请：&nbsp;<a target="_blank" href="kingdee.do?cmd=page_list_task_cgsq"><font color="blue">$!{cgsq}</font>&nbsp;张</a></font></td>
+	</tr>
+	<tr><td>&nbsp;</td></tr>
+	#end
+	#if(0!=$wgrk)
+	<tr>
+		<td><font face="新宋体" style="font-size: 12px;">外购入库：&nbsp;<a target="_blank" href="kingdee.do?cmd=page_list_task_wgrk"><font color="blue">$!{wgrk}</font>&nbsp;张</a></font></td>
+	</tr>
+	<tr><td>&nbsp;</td></tr>
+	#end
+	#if(0!=$cprk)
+	<tr>
+		<td><font face="新宋体" style="font-size: 12px;">产品入库：&nbsp;<a target="_blank" href="kingdee.do?cmd=page_list_task_cprk"><font color="blue">$!{cprk}</font>&nbsp;张</a></font></td>
+	</tr>
+	<tr><td>&nbsp;</td></tr>
+	#end
+	#if(0!=$stjgrk)
+	<tr>
+		<td><font face="新宋体" style="font-size: 12px;">受托入库：&nbsp;<a target="_blank" href="kingdee.do?cmd=page_list_task_stjgrk"><font color="blue">$!{stjgrk}</font>&nbsp;张</a></font></td>
+	</tr>
+	#end
+</table>
+#if(0==$stjgrk&&0==$wgrk&&0==$cprk&&0==$cgsq)
+<font color="green" style="font-size: 12px;">目前尚无事务需要处理！</font>
+#end
+</body>
+</html>

@@ -1,0 +1,61 @@
+<link rel="stylesheet" type="text/css" href="plugins/extjs/ext-3.2/resources/css/ext-all.gzcss" />
+<link rel="stylesheet" type="text/css" href="plugins/extjs/ext-3.2/examples/ux/css/ux-all.gzcss" />
+<link rel="stylesheet" type="text/css" href="plugins/extjs/ext-3.2/resources/css/xtheme-gray.gzcss" />
+<link rel="stylesheet" type="text/css" href="plugins/extjs/webapp/css/default.gzcss" />
+<script type="text/javascript" src="plugins/extjs/ext-3.2/adapter/ext/ext-base.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/ext-3.2/ext-all.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/ext-3.2/examples/ux/ux-all.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/easyjf/core.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/emr/share/ComboBoxTree.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/emr/share/RowExpander.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/emr/share/SearchField.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/emr/share/global.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/emr/share/querywindow.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/emr/share/querypanel.gzjs"></script>
+<script type="text/javascript" src="plugins/extjs/emr/share/DynamicGrid.gzjs"></script>
+<script type="text/javascript">
+	Ext.BLANK_IMAGE_URL = 'plugins/extjs/ext-3.2/resources/images/default/s.gif';
+	Ext.chart.Chart.CHART_URL = 'plugins/extjs/ext-3.2/resources/charts.swf';
+
+	/*
+	 * 根据不同的分辨率调整表格pageSize
+	 */
+	var pgSize=20;
+	var iframeWidth = 780;
+	var iframeHeight = 600;
+	if(1024<=screen.height){
+		pgSize=32;
+		iframeHeight = 720;
+	}else if(1024>screen.height&&900<=screen.height){
+		pgSize=26;
+		iframeHeight = 600;
+	}else if(900>screen.height&&800<=screen.height){
+		pgSize=21;
+		iframeHeight = 500;
+	}else if(800>screen.height&&768<=screen.height){
+		pgSize=20;
+		iframeHeight = 400;
+	}
+	
+	
+	if(1440<=screen.width){
+		iframeWidth = 1280;
+	}else if(1360<screen.width&&1440>=screen.width){
+		iframeWidth = 1120;
+	}else if(1280<screen.width&&1360>=screen.width){
+		iframeWidth = 1024;
+	}else if(1024<screen.width&&1280>=screen.width){		
+		iframeWidth = 980;
+	}else if(1024>=screen.width){		
+		iframeWidth = 780;
+	}
+
+	// 自定义条件的记录格式
+	var Row = Ext.data.Record.create([
+	    {name: 'join', type: 'string'},
+	    {name: 'item', type: 'string'},
+	    {name: 'expression', type: 'string'},
+	    {name: 'value', type: 'string'}		       
+	]);
+		
+</script>

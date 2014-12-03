@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+#parse("/link_share.html")
+</head>
+<body leftmargin= "0"   topmargin= "0">
+<center>
+<font color="blue" size="6">$!{success}</font>
+<br>
+<br>
+<font style="font-size:80px" face="黑体"><!-- img  src="images/rss/logo1.bmp" /--><b>合格证</b></font>
+<form action="tools.do?cmd=coc1" method="post">
+<table cellpadding="0" cellspacing="0" border="1" style="border-collapse:collapse;" bordercolor=black>
+	<tr height="32">
+		<td align="center"><font style="font-size:20px"><b>产品名称</b></font></td>
+		<td align="center" valign="middle" width="200">			
+			<input type="text" name="FName" value='$!{FName}' style="font-size:20px;width:150px;border-style:none;font-weight:bold;font-family:黑体;"/>
+		</td>				
+	</tr>
+	<tr height="32">
+		<td align="center"><font style="font-size:20px"><b>物料代码</b></font></td>
+		<td align="center" valign="middle">
+			<input type="hidden" name="FNumber" value="$!{FNumber}" style="font-size:20px;width:150px;border-style:none;font-weight:bold;font-family:黑体;"/>
+			<font style="font-weight:bold;font-size:20px" face="黑体"><b>$!{FNumber}</b></font>
+		</td>
+	</tr>
+	
+	
+	<tr height="40">
+		<td>
+			<table cellpadding="0" cellspacing="0" border="1" style="border-collapse:collapse;border-bottom:none;border-left:none;border-right:none;border-top:none;" bordercolor=black >
+				<tr height="12">
+					<td align="center" valign="middle" style="border-left:none;border-right:none;border-top:none;"><font style="font-size:20px"><b>客户图号</b></font></td>
+				</tr>
+				<tr height="12">
+					<td align="center" valign="bottom" style="border-bottom:none;border-left:none;border-right:none;border-top:none;"><font style="font-size:20px"><b>规格型号</b></font></td>
+				</tr>
+			</table>
+		</td>
+		<td align="center" valign="middle">
+			<font style="font-weight:bold;font-size:20px" face="黑体">$!{FModel}</font>
+			<input type="hidden" name="FModel" value="$!{FModel}" style="font-size:20px;width:150px;border-style:none;font-weight:bold;font-family:黑体;">					
+		</td>
+	</tr>
+	
+	
+	<tr height="32">
+		<td align="center"><font style="font-size:20px"><b>跟踪单号</b></font></td>
+		<td align="center" valign="middle">			
+			<input type="hidden" name="FICMOBillNo" value="$!{note}" style="font-size:20px;width:150px;border-style:none;font-weight:bold;font-family:黑体;"/>
+			<font style="font-weight:bold;font-size:20px" face="黑体"><b>$!{note}</b></font>			
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<table cellpadding="0" cellspacing="0" border="1" width="100%" style="border-collapse:collapse;border-bottom:none;border-left:none;border-right:none;border-top:none;" bordercolor=black>
+				<tr height="32">
+					<td style="border-left:none;border-top:none;" align="center"><font style="font-size:20px"><b>批号</b></font></td>
+					<td style="border-top:none;" align="center">
+						<font style="font-weight:bold;font-size:20px;" face="黑体"><b>$!{FBatchNo}</b></font>					
+						<input type="hidden" name="FBatchNo" value="$!{FBatchNo}" style="font-size:20px;width:80px;border-style:none;font-weight:bold;font-family:黑体;"/>
+					</td>
+					<td style="border-top:none;" align="center"><font style="font-size:20px"><b>数量</b></font></td>
+					<td style="border-right:none;border-top:none;" align="center">&nbsp;<input type="text" name="FQty" value="$!{FQty}" style="font-size:20px;width:80px;border-style:none;font-weight:bold;font-family:黑体;"/></td>
+				</tr>
+				<tr height="32">
+					<td style="border-bottom:none;border-left:none;" align="center"><font style="font-size:20px"><b>检验</b></font></td>
+					<td style="border-bottom:none;" align="center">
+						<font style="font-weight:bold;font-size:20px" face="黑体"><b>$!{FUser}</b></font>
+						<input type="hidden" name="FUser" value="$!{FUser}" style="font-size:20px;width:80px;border-style:none;font-weight:bold;font-family:黑体;"/>
+					</td>
+					<td style="border-bottom:none;" align="center"><font style="font-size:20px" ><b>日期</b></font></td>
+					<td style="border-bottom:none;border-right:none;" align="center">
+						<font style="font-weight:bold;font-size:12px" face="黑体"><b>$!{FDate}</b></font>
+						<input type="hidden" name="FDate" value="$!{FDate}" style="font-size:12px;width:80px;border-style:none;font-weight:bold;font-family:黑体;"/>
+					</td>
+				</tr>				
+			</table>
+		</td>
+	</tr>
+</table>
+<br>
+<br>
+<input type="button" onclick="sub();" value="生成合格证"/>
+<input type="hidden" name="luhao" value="$!{luhao}" style="font-size:12px;width:80px;border-style:none;font-weight:bold;font-family:黑体;"/>
+<input type="hidden" name="fangbao" value="$!{fangbao}" style="font-size:12px;width:80px;border-style:none;font-weight:bold;font-family:黑体;"/>
+
+</form>
+</center>
+<script type="text/javascript">
+function sub(){
+	wldm = document.getElementsByName('FNumber')[0].value;
+	wlmc = document.getElementsByName('FName')[0].value;
+	wlgg = document.getElementsByName('FModel')[0].value;
+	gzdh = document.getElementsByName('FICMOBillNo')[0].value;
+	fssl = document.getElementsByName('FQty')[0].value;
+	wlph = document.getElementsByName('FBatchNo')[0].value;
+	jyry = document.getElementsByName('FUser')[0].value;
+	jyrq = document.getElementsByName('FDate')[0].value;
+	if(''==wldm||''==wlmc||''==gzdh||''==jyry||''==jyrq){
+		alert('输入信息不完整，请检查！！！');
+	}else{
+		document.forms[0].submit();
+	}		
+}
+</script>
+</body>
+</html>

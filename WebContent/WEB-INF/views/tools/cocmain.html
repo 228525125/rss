@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>合格证</title>
+</head>
+<body>
+<br>
+<br>
+<center>
+<form action="?cmd=cocmain" method="post">
+<font style="font-size: 14px;">
+请输入检验单编号：</font><input type="text" name="FBillNo" value="$!{jydh}" onkeydown="if(event.keyCode==13){openwin();}"/>
+<input type="button" value="生成合格证" onclick="openwin();">
+
+<br>
+<br>
+<font style="font-size: 14px;">
+请输入任务单编号：</font><input type="text" name="FICMOBillNo" value="$!{FICMOBillNo}" onkeydown="if(event.keyCode==13){document.forms[0].submit();}"/>
+<input type="button" value="查找检验单" onclick="document.forms[0].submit();">
+</form>
+
+<br>
+<br>
+<hr>
+<br>
+<font style="font-size: 14px;">
+请输入任务单编号：</font><input type="text" name="FBillNo" value="$!{FICMOBillNo}" onkeydown="if(event.keyCode==13){openwin_scrw();}"/>
+<input type="button" value="生成合格证" onclick="openwin_scrw();">
+<br>
+<br>
+
+<font style="font-size: 14px;">
+请输入流转卡编号：</font><input type="text" name="FCBillNo" value="$!{FCBillNo}" onkeydown="if(event.keyCode==13){openwin_lzk();}"/>
+<input type="button" value="生成合格证" onclick="openwin_lzk();">
+</center>
+
+<script type="text/javascript">
+	function openwin(){				
+		var href = "tools.do?cmd=coc&djbh="+document.getElementsByName('FBillNo')[0].value;
+　　		window.open (href,"newwindow","height=500, width=600, toolbar=no, menubar=yes, scrollbars=no, resizable=yes, location=no, status=no");		
+	}
+
+	function openwin_scrw(){				
+		var href = "tools.do?cmd=coc_scrw&djbh="+document.getElementsByName('FBillNo')[1].value;
+　　		window.open (href,"newwindow","height=500, width=600, toolbar=no, menubar=yes, scrollbars=no, resizable=yes, location=no, status=no");		
+	}
+
+	function openwin_lzk(){				
+		var href = "tools.do?cmd=coc_lzk&djbh="+document.getElementsByName('FCBillNo')[0].value;
+　　		window.open (href,"newwindow","height=500, width=600, toolbar=no, menubar=yes, scrollbars=no, resizable=yes, location=no, status=no");		
+	}
+</script>
+</body>
+</html>

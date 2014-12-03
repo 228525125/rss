@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">  
+  
+  <bean id="workPlanDao" parent="abstractDao"> 
+    <property name="proxyInterfaces"> 
+      <value>org.cx.rss.dao.IWorkPlanDAO</value> 
+    </property>  
+    <property name="target"> 
+      <bean parent="baseDAO"> 
+        <constructor-arg> 
+          <value>org.cx.rss.domain.WorkPlan</value> 
+        </constructor-arg> 
+      </bean> 
+    </property> 
+  </bean>
+  <bean id="userDao" parent="abstractDao"> 
+    <property name="proxyInterfaces"> 
+      <value>org.cx.rss.dao.IUserDAO</value> 
+    </property>  
+    <property name="target"> 
+      <bean parent="baseDAO"> 
+        <constructor-arg> 
+          <value>org.cx.rss.domain.User</value> 
+        </constructor-arg> 
+      </bean> 
+    </property> 
+  </bean>
+  <bean id="maxidDao" parent="abstractDao"> 
+    <property name="proxyInterfaces"> 
+      <value>org.cx.rss.dao.IMaxidDAO</value> 
+    </property>  
+    <property name="target"> 
+      <bean parent="baseDAO"> 
+        <constructor-arg> 
+          <value>org.cx.rss.domain.Maxid</value> 
+        </constructor-arg> 
+      </bean> 
+    </property> 
+  </bean>
+  <bean id="taskPlanDao" parent="abstractDao"> 
+    <property name="proxyInterfaces"> 
+      <value>org.cx.rss.dao.ITaskPlanDAO</value> 
+    </property>  
+    <property name="target"> 
+      <bean parent="baseDAO"> 
+        <constructor-arg> 
+          <value>org.cx.rss.domain.TaskPlan</value> 
+        </constructor-arg> 
+      </bean> 
+    </property> 
+  </bean>
+  <bean id="equipmentDao" parent="abstractDao">
+    	<property name="proxyInterfaces">
+   			<value>org.cx.rss.dao.IEquipmentDAO</value> 
+  		</property>
+ 		<property name="target">
+			<bean parent="baseDAO">
+		 		<constructor-arg>
+		  		<value>org.cx.rss.domain.Equipment</value> 
+		  		</constructor-arg>
+  			</bean>
+  		</property>
+  </bean>
+  
+  <bean id="moduleDao" parent="abstractDao"> 
+    <property name="proxyInterfaces"> 
+      <value>org.cx.rss.dao.IModuleDAO</value> 
+    </property>  
+    <property name="target"> 
+      <bean parent="baseDAO"> 
+        <constructor-arg> 
+          <value>org.cx.rss.domain.Module</value> 
+        </constructor-arg> 
+      </bean> 
+    </property> 
+  </bean>  
+  <bean id="operateLimitDao" parent="abstractDao"> 
+    <property name="proxyInterfaces"> 
+      <value>org.cx.rss.dao.IOperateLimitDAO</value> 
+    </property>  
+    <property name="target"> 
+      <bean parent="baseDAO"> 
+        <constructor-arg> 
+          <value>org.cx.rss.domain.OperateLimit</value> 
+        </constructor-arg> 
+      </bean> 
+    </property> 
+  </bean>
+  <bean id="roleDao" parent="abstractDao"> 
+    <property name="proxyInterfaces"> 
+      <value>org.cx.rss.dao.IRoleDAO</value> 
+    </property>  
+    <property name="target"> 
+      <bean parent="baseDAO"> 
+        <constructor-arg> 
+          <value>org.cx.rss.domain.Role</value> 
+        </constructor-arg> 
+      </bean> 
+    </property> 
+  </bean>
+  <bean id="fileClassDao" parent="abstractDao"> 
+    <property name="proxyInterfaces"> 
+      <value>org.cx.rss.dao.IFileClassDAO</value> 
+    </property>  
+    <property name="target"> 
+      <bean parent="baseDAO"> 
+        <constructor-arg> 
+          <value>org.cx.rss.domain.FileClass</value> 
+        </constructor-arg> 
+      </bean> 
+    </property> 
+  </bean>     
+  
+  <!-- 自动加载关联对象 -->
+  <bean id="jpaPoLoader" class="com.easyjf.core.dao.impl.JpaPOLoaderImpl">
+  	<property name="entityManagerFactory" ref="entityManagerFactory" />
+  </bean>
+
+</beans>
