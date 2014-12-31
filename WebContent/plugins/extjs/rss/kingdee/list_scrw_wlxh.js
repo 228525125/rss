@@ -12,7 +12,7 @@ ScrwWlxhListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_scrw_wlxh',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:["djbh","djrq","cpdm","cpmc","cpgg","cpph","jhsl","sqsl","hgsl","rksl","wldm","wlmc","wlgg","dwyl","llsl","bfsl","tlsl","zzpsl","djzt","gfsl","lfsl","hbsl","jhtlsl","ddbh","jhrq","ddsl"],
+			fields:["djbh","djrq","cpdm","cpmc","cpgg","cpph","jhsl","sqsl","hgsl","bhgsl","rksl","wldm","wlmc","wlgg","dwyl","llsl","bfsl","tlsl","zzpsl","djzt","gfsl","lfsl","hbsl","jhtlsl","ddbh","jhrq","ddsl"],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:2000}
 	    });
@@ -185,6 +185,12 @@ ScrwWlxhListPanel = Ext.extend(Ext.Panel, {
                                 dataIndex: 'hgsl'
                             },{
                                 xtype: 'gridcolumn',
+                                header: '不合格',
+                                resizable: true,
+                                width: 60,
+                                dataIndex: 'bhgsl'
+                            }/*,{
+                                xtype: 'gridcolumn',
                                 header: '工废',
                                 resizable: true,
                                 width: 40,
@@ -195,7 +201,7 @@ ScrwWlxhListPanel = Ext.extend(Ext.Panel, {
                                 resizable: true,
                                 width: 40,
                                 dataIndex: 'lfsl'
-                            },{
+                            }*/,{
                                 xtype: 'gridcolumn',
                                 header: '入库',
                                 resizable: true,
