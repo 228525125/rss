@@ -13,7 +13,7 @@ SellStockBillListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_xsck',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:['FOrderID','FSourceID','Fdate','FCheck','FCancellation','FBillNo','FHookStatus','FStatus','dwdm','wldw','ywy','cpmc','cpgg','jldw','fssl','cpdm','cpph','note','hsdj','lh'],
+			fields:['FOrderID','FSourceID','Fdate','FCheck','FCancellation','FBillNo','FHookStatus','FStatus','dwdm','wldw','ywy','cpmc','cpgg','jldw','fssl','cpdm','cpph','note','hsdj','lh','khddh'],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:pgSize}
 	    });
@@ -296,14 +296,14 @@ SellStockBillListPanel = Ext.extend(Ext.Panel, {
                                 resizable: true,
                                 width: 150,
                                 dataIndex: 'note'
-                            }/*,{
+                            },{
                                 xtype: 'gridcolumn',
-                                header: '含税单价',
+                                header: '客户订单号',
                                 sortable: true,
                                 resizable: true,
-                                width: 100,
-                                dataIndex: 'hsdj'
-                            }*/
+                                width: 150,
+                                dataIndex: 'khddh'
+                            }
                         ]),
                         listeners: {
 	                		'cellclick': {fn:function(t,rowIndex,columnIndex,e){	                			                    	

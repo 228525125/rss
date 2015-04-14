@@ -1,15 +1,11 @@
 package org.cx.rss.mvc;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.cx.rss.service.IKingdeeService;
 
 import com.easyjf.container.annonation.Inject;
-import com.easyjf.web.ActionContext;
 import com.easyjf.web.WebForm;
 
 public class ToolsAction extends BaseAction {
@@ -48,11 +44,26 @@ public class ToolsAction extends BaseAction {
 					form.addResult("FICMONo", FICMONo);
 				}
 				
-				String luhao = bean.get("LH").toString();
-				form.addResult("luhao", luhao);
+				if(null!=bean.get("LH")){
+					String luhao = bean.get("LH").toString();
+					form.addResult("luhao", luhao);
+				}
 				
-				String fangbao = bean.get("EX").toString();
-				form.addResult("fangbao", fangbao);
+				if(null!=bean.get("EX")){
+					String fangbao = bean.get("EX").toString();
+					form.addResult("fangbao", fangbao);
+				}
+				
+				if(null!=bean.get("caizhi")){
+					String caizhi = bean.get("caizhi").toString();
+					form.addResult("caizhi", caizhi);
+				}
+				
+				if(null!=bean.get("beizhu")){
+					String beizhu = bean.get("beizhu").toString();
+					form.addResult("beizhu", beizhu);
+				}
+				
 				kingdeeService.insert_coc(bean.get("FName").toString(), bean.get("FNumber").toString(), bean.get("FModel").toString(), FICMOBillNo, bean.get("FBatchNo").toString(), bean.get("FUser").toString(), bean.get("FDate").toString(), bean.get("FNote").toString());
 				//form.addResult("success", "合格证生成完毕！如下列信息：");
 			}else{
@@ -81,8 +92,25 @@ public class ToolsAction extends BaseAction {
 					form.addResult("FICMONo", FICMONo);
 				}
 				
-				String luhao = bean.get("LH").toString();
-				form.addResult("luhao", luhao);
+				if(null!=bean.get("LH")){
+					String luhao = bean.get("LH").toString();
+					form.addResult("luhao", luhao);
+				}
+				
+				if(null!=bean.get("EX")){
+					String fangbao = bean.get("EX").toString();
+					form.addResult("fangbao", fangbao);
+				}
+				
+				if(null!=bean.get("caizhi")){
+					String caizhi = bean.get("caizhi").toString();
+					form.addResult("caizhi", caizhi);
+				}
+				
+				if(null!=bean.get("beizhu")){
+					String beizhu = bean.get("beizhu").toString();
+					form.addResult("beizhu", beizhu);
+				}
 				
 				kingdeeService.insert_coc(bean.get("FName").toString(), bean.get("FNumber").toString(), bean.get("FModel").toString(), bean.get("FICMOBillNo").toString(), bean.get("FBatchNo").toString(), bean.get("FUser").toString(), bean.get("FDate").toString(), bean.get("FNote").toString());
 			}else{
@@ -112,8 +140,30 @@ public class ToolsAction extends BaseAction {
 					form.addResult("FICMONo", FICMONo);
 				}
 				
-				String luhao = bean.get("LH").toString();
-				form.addResult("luhao", luhao);
+				if(null!=bean.get("LH")){
+					String luhao = bean.get("LH").toString();
+					form.addResult("luhao", luhao);
+				}
+				
+				if(null!=bean.get("EX")){
+					String fangbao = bean.get("EX").toString();
+					form.addResult("fangbao", fangbao);
+				}
+				
+				if(null!=bean.get("caizhi")){
+					String caizhi = bean.get("caizhi").toString();
+					form.addResult("caizhi", caizhi);
+				}
+				
+				if(null!=bean.get("beizhu")){
+					String beizhu = bean.get("beizhu").toString();
+					form.addResult("beizhu", beizhu);
+				}
+				
+				if(null!=bean.get("lzk")){
+					String lzk = bean.get("lzk").toString();
+					form.addResult("lzk", lzk);
+				}
 				
 				kingdeeService.insert_coc(bean.get("FName").toString(), bean.get("FNumber").toString(), bean.get("FModel").toString(), bean.get("FICMOBillNo").toString(), bean.get("FBatchNo").toString(), bean.get("FUser").toString(), bean.get("FDate").toString(), bean.get("FNote").toString());
 			}else{
@@ -140,6 +190,10 @@ public class ToolsAction extends BaseAction {
 		String fssl = "";
 		String luhao = "";
 		String fangbao = "";
+		String caizhi = "";
+		String beizhu = "";
+		String wlth = "";
+		String lzk = "";
 		if(null!=form.get("FNumber")&&!"".equals(form.get("FNumber").toString())){
 			wldm = form.get("FNumber").toString();
 		}
@@ -171,8 +225,21 @@ public class ToolsAction extends BaseAction {
 		if(null!=form.get("fangbao")&&!"".equals(form.get("fangbao").toString())){
 			fangbao = form.get("fangbao").toString();
 		}
+		if(null!=form.get("caizhi")&&!"".equals(form.get("caizhi").toString())){
+			caizhi = form.get("caizhi").toString();
+		}
+		if(null!=form.get("beizhu")&&!"".equals(form.get("beizhu").toString())){
+			beizhu = form.get("beizhu").toString();
+		}
+		if(null!=form.get("FHelpCode")&&!"".equals(form.get("FHelpCode").toString())){
+			wlth = form.get("FHelpCode").toString();
+		}
+		if(null!=form.get("lzk")&&!"".equals(form.get("lzk").toString())){
+			lzk = form.get("lzk").toString();
+		}
+		
 		if(!"".equals(wldm)&&!"".equals(wlmc)&&!"".equals(jyry)&&!"".equals(jyrq)){
-			kingdeeService.insert_coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao,fangbao);
+			kingdeeService.insert_coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk);
 			form.addResult("success", "合格证生成完毕！");
 		}
 		page("coc");
@@ -194,6 +261,21 @@ public class ToolsAction extends BaseAction {
 			}else{
 				form.addResult("failure", "输入有误，请检查！！！");
 			}
+		}
+	}
+	
+	public void bom(WebForm form){		
+		if(null!=form.get("djbh")&&!"".equals(form.get("djbh"))){
+			String djbh = form.get("djbh").toString();			
+			List list = kingdeeService.print_bom(djbh);
+			if(1==list.size()){
+				Map bean = (Map)list.get(0);
+				form.addPo(bean);
+			}else{
+				form.addResult("success", "输入有误，请检查！！！");
+			}
+		}else{
+			form.addResult("success", "输入有误，请检查！！！");
 		}
 	}
 

@@ -176,6 +176,12 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		return kingdeeDao.queryForList(sql);
 	}
 	
+	public List print_bom(String FBillNo) {
+		// TODO Auto-generated method stub
+		String sql = "execute print_bom '"+FBillNo+"'";
+		return kingdeeDao.queryForList(sql);
+	}
+	
 	public List sreach_fqc(String FBillNo) {
 		// TODO Auto-generated method stub
 		String sql = "select FBillNo from View_ProductInspectionSlip713 where FICMOBillNo like '%"+FBillNo+"' group by FBillNo";
@@ -304,10 +310,10 @@ public class KingdeeServiceImpl implements IKingdeeService {
 	}
 	
 	public void insert_coc1(String wlmc, String wldm, String wlgg, String gzdh,
-			String wlph, String jyry, String jyrq, String fssl, String luhao, String fangbao) {
+			String wlph, String jyry, String jyrq, String fssl, String luhao, String fangbao, String caizhi, String beizhu, String wlth, String lzk) {
 		// TODO Auto-generated method stub
-		String sql = "insert coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao, fangbao) values (?,?,?,?,?,?,?,?,?,?)";
-		rssDao.update(sql, new Object[]{wlmc,wldm,wlgg,gzdh,wlph,jyry,jyrq,fssl,luhao,fangbao});
+		String sql = "insert coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao, fangbao, caizhi, beizhu, wlth, lzk) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		rssDao.update(sql, new Object[]{wlmc,wldm,wlgg,gzdh,wlph,jyry,jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk});
 	}
 	
 	public void insert_thcx(String gsth, String cpmc, String khth, String cpcz, String sslb,
