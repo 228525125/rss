@@ -177,6 +177,13 @@ public interface IKingdeeService {
 	public List print_coc_lzk(String FBillNo);
 	
 	/**
+	 * 打印物料卡
+	 * @param FBillNo 任务单号
+	 * @return
+	 */
+	public List print_bom(String FBillNo);
+	
+	/**
 	 * 根据任务单查找检验单
 	 * @param FBillNo
 	 * @return
@@ -359,7 +366,7 @@ public interface IKingdeeService {
 	 * @param jyry
 	 * @param jyrq
 	 */
-	public void insert_coc1(String wlmc, String wldm, String wlgg, String gzdh, String wlph, String jyry, String jyrq, String fssl, String luhao,String fangbao);
+	public void insert_coc1(String wlmc, String wldm, String wlgg, String gzdh, String wlph, String jyry, String jyrq, String fssl, String luhao,String fangbao, String caizhi, String beizhu, String wlth, String lzk);
 	
 	/**
 	 * 插入图号

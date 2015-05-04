@@ -10,7 +10,6 @@ import org.cx.rss.tools.Task;
 
 public class TaskServlet extends HttpServlet {
 
-	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub

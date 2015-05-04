@@ -25,7 +25,7 @@
 	 
 	<bean id="dataSourceKingdee" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-		<property name="url" value="jdbc:sqlserver://192.168.1.200:1433;databaseName=AIS20091218114908"/>
+		<property name="url" value="jdbc:sqlserver://192.168.1.203:1433;databaseName=AIS20091218114908"/>
 		<!-- <property name="url" value="jdbc:sqlserver://192.168.1.200:1433;databaseName=AIS20100305141036"/>  -->
 		<property name="username" value="sa"/>
 		<property name="password" value="123456"/>
@@ -41,7 +41,7 @@
 	
 	<bean id="dataSourceRss" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-		<property name="url" value="jdbc:sqlserver://192.168.1.200:1433;databaseName=rss"/>
+		<property name="url" value="jdbc:sqlserver://192.168.1.203:1433;databaseName=rss"/>
 		<property name="username" value="sa"/>
 		<property name="password" value="123456"/>
 	</bean>
