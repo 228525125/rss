@@ -6,6 +6,7 @@ import java.util.Map;
 import org.cx.rss.service.IKingdeeService;
 
 import com.easyjf.container.annonation.Inject;
+import com.easyjf.web.ActionContext;
 import com.easyjf.web.WebForm;
 
 public class ToolsAction extends BaseAction {
@@ -194,6 +195,7 @@ public class ToolsAction extends BaseAction {
 		String beizhu = "";
 		String wlth = "";
 		String lzk = "";
+		String IP = ActionContext.getContext().getRequest().getRemoteAddr();
 		if(null!=form.get("FNumber")&&!"".equals(form.get("FNumber").toString())){
 			wldm = form.get("FNumber").toString();
 		}
@@ -239,7 +241,7 @@ public class ToolsAction extends BaseAction {
 		}
 		
 		if(!"".equals(wldm)&&!"".equals(wlmc)&&!"".equals(jyry)&&!"".equals(jyrq)){
-			kingdeeService.insert_coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk);
+			kingdeeService.insert_coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk,IP);
 			form.addResult("success", "合格证生成完毕！");
 		}
 		page("coc");

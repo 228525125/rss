@@ -310,10 +310,10 @@ public class KingdeeServiceImpl implements IKingdeeService {
 	}
 	
 	public void insert_coc1(String wlmc, String wldm, String wlgg, String gzdh,
-			String wlph, String jyry, String jyrq, String fssl, String luhao, String fangbao, String caizhi, String beizhu, String wlth, String lzk) {
+			String wlph, String jyry, String jyrq, String fssl, String luhao, String fangbao, String caizhi, String beizhu, String wlth, String lzk, String ip) {
 		// TODO Auto-generated method stub
-		String sql = "insert coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao, fangbao, caizhi, beizhu, wlth, lzk) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		rssDao.update(sql, new Object[]{wlmc,wldm,wlgg,gzdh,wlph,jyry,jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk});
+		String sql = "insert coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao, fangbao, caizhi, beizhu, wlth, lzk, ip) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		rssDao.update(sql, new Object[]{wlmc,wldm,wlgg,gzdh,wlph,jyry,jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk,ip});
 	}
 	
 	public void insert_thcx(String gsth, String cpmc, String khth, String cpcz, String sslb,

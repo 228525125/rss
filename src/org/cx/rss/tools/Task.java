@@ -40,6 +40,12 @@ public class Task extends TimerTask {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			System.out.println("task time:"+df.format(date));
 		}
+		
+		if(18 == date.getHours()){       // 下午6点执行
+			ks.exec_close_scrw();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			System.out.println("task time:"+df.format(date));
+		}
 	}
 
 }

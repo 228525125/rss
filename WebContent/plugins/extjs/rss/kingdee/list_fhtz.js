@@ -13,7 +13,7 @@ SellOutListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_fhtz',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:['FOrderID','FOutID','FCheck','FStatus','FCloseStatus','FDate','FBillNo','dwdm','wldw','ywy','cpdm','cpmc','cpgg','jldw','fssl','hywgb','jskc','cksl'],
+			fields:['FOrderID','FOutID','FCheck','FStatus','FCloseStatus','FDate','FBillNo','dwdm','wldw','ywy','cpdm','cpmc','cpgg','jldw','fssl','hywgb','jskc','cksl','yjrkl'],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:pgSize}
 	    });
@@ -287,6 +287,13 @@ SellOutListPanel = Ext.extend(Ext.Panel, {
                                 resizable: true,
                                 width: 60,
                                 dataIndex: 'jskc'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '预计入库量',
+                                sortable: true,
+                                resizable: true,
+                                width: 60,
+                                dataIndex: 'yjrkl'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '已出库',

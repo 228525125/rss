@@ -366,7 +366,7 @@ public interface IKingdeeService {
 	 * @param jyry
 	 * @param jyrq
 	 */
-	public void insert_coc1(String wlmc, String wldm, String wlgg, String gzdh, String wlph, String jyry, String jyrq, String fssl, String luhao,String fangbao, String caizhi, String beizhu, String wlth, String lzk);
+	public void insert_coc1(String wlmc, String wldm, String wlgg, String gzdh, String wlph, String jyry, String jyrq, String fssl, String luhao,String fangbao, String caizhi, String beizhu, String wlth, String lzk, String ip);
 	
 	/**
 	 * 插入图号
