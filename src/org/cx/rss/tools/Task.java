@@ -16,7 +16,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class Task extends TimerTask {
 
 	private ServletContext sc;
-	private IKingdeeDao kingdeeDao;
 	
 	public Task(ServletContext sc) {
 		// TODO Auto-generated constructor stub
@@ -29,7 +28,7 @@ public class Task extends TimerTask {
 		ApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(sc);
 		IKingdeeService ks = (IKingdeeService) context.getBean("kingdeeService");
 		Date date = new Date(System.currentTimeMillis());
-		if(7 == date.getHours()){       // 早上7点执行
+		/*if(7 == date.getHours()){       // 早上7点执行
 			ks.exec_close_scrw();
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			System.out.println("task time:"+df.format(date));
@@ -45,7 +44,17 @@ public class Task extends TimerTask {
 			ks.exec_close_scrw();
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			System.out.println("task time:"+df.format(date));
-		}
+		}*/
+		
+		ks.exec_close_scrw();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println("task time:"+df.format(date));
+	}
+	
+	public static void main(String[] args) {
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(df.format(date));
 	}
 
 }

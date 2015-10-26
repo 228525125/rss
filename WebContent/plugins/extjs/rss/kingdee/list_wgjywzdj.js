@@ -12,7 +12,7 @@ WgjywzdjListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_wgjywzdj',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:['djbh','djrq','jyrq','dhrq','wldm','wlmc','wlgg','jldw','fssl'],
+			fields:['djbh','djrq','jyrq','dhrq','wldm','wlmc','wlgg','jldw','fssl','hh'],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:2000}
 	    });
@@ -52,6 +52,13 @@ WgjywzdjListPanel = Ext.extend(Ext.Panel, {
                                 resizable: true,
                                 width: 100,
                                 dataIndex: 'djbh'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '行号',
+                                sortable: true,
+                                resizable: true,
+                                width: 100,
+                                dataIndex: 'hh'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '申请日期',

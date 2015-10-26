@@ -556,6 +556,23 @@
 		this.jskc_lhbz.addListener('click',this.activateTab,this);	
 		this.cctj.appendChild(this.jskc_lhbz);
 		
+		this.jszl = new Ext.tree.TreeNode({
+			id:'jszl',
+			iconCls:'applicationIcon',
+			text:'技术资料'
+		});
+		
+		this.wdcx = new Ext.tree.TreeNode({
+			id:'wdcx',
+			iconCls:'gridIcon',
+			text:'文档查询'
+		});
+		this.wdcx.module = new Ext.Panel({title:'文档查询',iconCls:'gridIcon',html:'http://192.168.1.200:8080/emr/employee.do?cmd=search'});
+		this.wdcx.addListener('click',this.activateTab,this);	
+		this.jszl.appendChild(this.wdcx);
+		
+		
+		
 		this.xsddwhtree = new Ext.tree.TreePanel({
 			root:this.xsdjwh,
 			border:false
@@ -614,7 +631,12 @@
 		this.cctjtree = new Ext.tree.TreePanel({
 			root:this.cctj,
 			border:false
-		}); 
+		});
+		
+		this.jszltree = new Ext.tree.TreePanel({
+			root:this.jszl,
+			border:false
+		});
 		
 		this.menu = new Ext.Panel({
 			region:'west',
@@ -672,6 +694,13 @@
                     this.cctjtree                    
                 ],
                 iconCls:'bookopenIcon'
+            },{
+                title:'技术',
+                border:false,
+                items:[
+                    this.jszltree                    
+                ],
+                iconCls:'docsIcon'
             }]
 		});
 		

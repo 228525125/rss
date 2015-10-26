@@ -12,7 +12,7 @@ POrequestListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_cgsq',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:['FCheck','FCloseStatus','hywgb','FInterID','FEntryID','FBillNo','FCancellation','FSourceBillNo','FDate','cpdm','cpmc','cpgg','jldw','fssl','dhrq','ywy','shrq'],
+			fields:['FCheck','FCloseStatus','hywgb','FInterID','FEntryID','FBillNo','FCancellation','FSourceBillNo','FDate','cpdm','cpmc','cpgg','jldw','fssl','dhrq','ywy','shrq','rksl'],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:pgSize}
 	    });
@@ -217,7 +217,7 @@ POrequestListPanel = Ext.extend(Ext.Panel, {
                                 dataIndex: 'FCheck'
                             },{
                                 xtype: 'gridcolumn',
-                                header: '业务员',
+                                header: '申请人',
                                 sortable: true,
                                 resizable: true,
                                 width: 60,
@@ -262,6 +262,16 @@ POrequestListPanel = Ext.extend(Ext.Panel, {
                                 resizable: true,
                                 width: 60,
                                 dataIndex: 'fssl',
+                                renderer:function(value,metadata,record){	                            		                        	
+	                        		return value;
+	                        	}
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '入库数量',
+                                sortable: true,
+                                resizable: true,
+                                width: 60,
+                                dataIndex: 'rksl',
                                 renderer:function(value,metadata,record){	                            		                        	
 	                        		return value;
 	                        	}
