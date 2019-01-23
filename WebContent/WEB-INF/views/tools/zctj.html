@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>资产统计</title>
+#parse("/link_share.html")
+<script type="text/javascript" src="plugins/extjs/rss/kingdee/list_zctj.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+Ext.QuickTips.init();
+Ext.Ajax.timeout = 10 * 60 * 1000;  // 10分钟，默认为30秒  设置加载数据超时最大值
+var zctj;
+Ext.onReady(function(){
+	zctj = new ZctjListPanel();
+	
+	new Ext.Viewport({
+		layout:'fit',
+		items:[
+			zctj
+		]
+	});
+});
+
+</script>

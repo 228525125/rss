@@ -176,6 +176,11 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		return kingdeeDao.queryForList(sql);
 	}
 	
+	public List print_coc_wldm(String wldm) {
+		String sql = "execute print_coc_wldm '"+wldm+"'";
+		return kingdeeDao.queryForList(sql);
+	}
+	
 	public List print_bom(String FBillNo) {
 		// TODO Auto-generated method stub
 		String sql = "execute print_bom '"+FBillNo+"'";
@@ -862,6 +867,49 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		return QueryUtil.query(qo, totalsql, sql, true, jdbcDao);
 	}
 	
+	public IPageList list_stamp(QueryObject qo, String query) {
+		// TODO Auto-generated method stub
+		String sql = "execute query_stamp '"+query+"'";
+		String totalsql = "execute query_stamp_count '"+query+"'";
+		return QueryUtil.query(qo, totalsql, sql, true, jdbcDao);
+	}
+	
+	public void delete_record_stamp(String sn) {
+		// TODO Auto-generated method stub
+		String sql = "delete rss.dbo.stamp where SContent='"+sn+"'";
+		jdbcDao.execute(sql);
+	}
+	
+	public IPageList list_zctj(QueryObject qo, String query) {
+		// TODO Auto-generated method stub
+		String sql = "select FID,FModel,FBrand,FName,FSeriesNumber,FQty,SUBSTRING(FDateOfManufacture,0,11) as FDateOfManufacture,SUBSTRING(FDateOfBuy,0,11) as FDateOfBuy,FAssetID,FDepartment,FUser,FJobNumber,FNote,FIP,FMac,SUBSTRING(FDateOfApplication,0,11) as FDateOfApplication,DATEDIFF (year,FDateOfManufacture,getdate()) as FYear "
+				+ "from rss.dbo.zctj where "
+				+ "FAssetID like '%"+query+"%' "
+				+ "or FModel like '%"+query+"%' "
+				+ "or FBrand like '%"+query+"%' "
+				+ "or FName like '%"+query+"%' "
+				+ "or FSeriesNumber like '%"+query+"%' "
+				+ "or FDepartment like '%"+query+"%' "
+				+ "or FUser like '%"+query+"%' "
+				+ "or FJobNumber like '%"+query+"%' "
+				+ "or FNote like '%"+query+"%' "
+				+ "or FIP like '%"+query+"%' "
+				+ "or FMac like '%"+query+"%' ";
+		String totalsql = "select ISNULL(sum(1),0) from rss.dbo.zctj where "
+				+ "FAssetID like '%"+query+"%' "
+				+ "or FModel like '%"+query+"%' "
+				+ "or FBrand like '%"+query+"%' "
+				+ "or FName like '%"+query+"%' "
+				+ "or FSeriesNumber like '%"+query+"%' "
+				+ "or FDepartment like '%"+query+"%' "
+				+ "or FUser like '%"+query+"%' "
+				+ "or FJobNumber like '%"+query+"%' "
+				+ "or FNote like '%"+query+"%' "
+				+ "or FIP like '%"+query+"%' "
+				+ "or FMac like '%"+query+"%' ";
+		return QueryUtil.query(qo, totalsql, sql, true, jdbcDao);
+	}
+	
 	public Integer count_wxsjyc(String begin, String end) {
 		// TODO Auto-generated method stub
 		String sql ="execute list_wxsjyc_count '"+begin+"','"+end+"'";
@@ -933,6 +981,11 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		// TODO Auto-generated method stub
 		kingdeeDao.execute("exec close_scrw");
 		kingdeeDao.execute("exec unclose_scrw");
+	}
+	
+	public void updateForSQL(String sql) {
+		// TODO Auto-generated method stub
+		kingdeeDao.update(sql);
 	}
 	
 }

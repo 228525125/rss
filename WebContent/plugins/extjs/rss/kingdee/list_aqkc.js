@@ -6,6 +6,22 @@ SecStockListPanel = Ext.extend(Ext.Panel, {
     border: false,
     closable: true,
   	autoScroll:true,
+  	createFileUpload: function(){
+		if(!this.fileuploadwin||null==this.fileuploadwin){
+			this.fileuploadwin = new Ext.Window({
+				width:268,
+				height:146,
+				buttonAlign:"right",
+				title:'导入安全库存',
+				modal:true,
+				shadow:true,
+				closeAction:"close",
+				autoLoad:'fileUpload.do?cmd=iframe'
+			});
+		}
+		
+		this.fileuploadwin.on('close',function(p){this.fileuploadwin=null;},this);
+	},
     initComponent: function() {
 		//统计报表数据
 		this.store = new Ext.data.JsonStore({
@@ -208,6 +224,21 @@ SecStockListPanel = Ext.extend(Ext.Panel, {
 	        	            	var q = '&query='+this.queryfield.getValue();
 	        	            	var href = "kingdee.do?cmd=export_aqkc"+pageS+month+orderBy+orderType+encodeURI(q);
 	        	            	location.href = href;
+        	            	},
+        	            	scope: this
+        	            },'-',{
+        	            	text: '登录',
+        	            	handler: function(){
+        	            		var panel = Ext.getCmp('daibanshiyipanel');				
+        	    	            var win = new LoginWindow({dbsy:panel});
+        	    	            win.show();
+        	            	},
+        	            	scope: this
+        	            },'-',{
+        	            	text: '导入',
+        	            	handler: function(){
+	        	            	this.createFileUpload();		        	            	
+	        	        		this.fileuploadwin.show();
         	            	},
         	            	scope: this
         	            },'-','累计',this.month,'个月','-',this.state,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color=red>安全库存</font> = 采购周期（天）* 每天消耗量 + 最小起订量 ',

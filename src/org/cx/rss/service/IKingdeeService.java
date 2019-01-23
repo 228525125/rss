@@ -171,6 +171,13 @@ public interface IKingdeeService {
 	
 	/**
 	 * 打印合格证
+	 * @param wldm 物料代码
+	 * @return
+	 */
+	public List print_coc_wldm(String wldm);
+	
+	/**
+	 * 打印合格证
 	 * @param FBillNo 流转卡
 	 * @return
 	 */
@@ -1062,6 +1069,28 @@ public interface IKingdeeService {
 	public IPageList list_thcx(QueryObject qo, String query, String begin, String end);
 	
 	/**
+	 * 刻印数据查询
+	 * @param qo
+	 * @param query
+	 * @return
+	 */
+	public IPageList list_stamp(QueryObject qo, String query);
+	
+	/**
+	 * 根据出厂编号 删除记录
+	 * @param sn 出厂编号
+	 */
+	public void delete_record_stamp(String sn);
+	
+	/**
+	 * 资产统计-电脑打印机等
+	 * @param qo
+	 * @param query
+	 * @return
+	 */
+	public IPageList list_zctj(QueryObject qo, String query);
+	
+	/**
 	 * 外协送检异常单据数量
 	 * @param begin
 	 * @param end
@@ -1146,5 +1175,7 @@ public interface IKingdeeService {
 	 * 系统自动判断任务单是否可以结案，如果物料平衡并且计划数量也执行完毕，就结案，如果没有接收而已结案的任务单，执行反结案
 	 */
 	public void exec_close_scrw();
+	
+	public void updateForSQL(String sql);
 	
 }

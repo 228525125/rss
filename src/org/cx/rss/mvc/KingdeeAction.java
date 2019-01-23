@@ -31,6 +31,7 @@ import org.json.simple.parser.JSONParser;
 
 import com.easyjf.container.annonation.Inject;
 import com.easyjf.core.support.query.QueryObject;
+import com.easyjf.util.CommUtil;
 import com.easyjf.web.ActionContext;
 import com.easyjf.web.Page;
 import com.easyjf.web.WebForm;
@@ -543,6 +544,89 @@ public class KingdeeAction extends BaseAction {
 		IPageList pageList = kingdeeService.list_wwjysqd(qo,query,begin,end);
 		form.jsonResult(pageList);
 		return Page.JSONPage;
+	}
+	
+	public void export_wwjysqd(WebForm form) {
+		QueryObject qo = form.toPo(QueryObject.class);
+		String begin = ""+Calendar.getInstance().get(Calendar.YEAR)+"-"+Calendar.getInstance().get(Calendar.MONTH)+"-"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		String end = ""+Calendar.getInstance().get(Calendar.YEAR)+"-"+(Calendar.getInstance().get(Calendar.MONTH)+1)+"-"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		String query = "";
+		if(null!=form.get("query")&&!"".equals(form.get("query").toString()))
+			query = form.get("query").toString();
+		if(null!=form.get("begin")&&!"".equals(form.get("begin").toString()))
+			begin = form.get("begin").toString();
+		if(null!=form.get("end")&&!"".equals(form.get("end").toString()))
+			end = form.get("end").toString();
+		IPageList pageList = kingdeeService.list_wwjysqd(qo,query,begin,end);		
+		List list = pageList.getResult();		
+		
+		TableFacade tableFacade = createTableFacade("basic", ActionContext.getContext().getRequest());
+		tableFacade.setItems(list); // set the items
+		tableFacade.setStateAttr("restore"); // return to the table in the same state that the user left it.
+		
+		tableFacade.setExportTypes(ActionContext.getContext().getResponse(), JEXCEL);
+		
+		Limit limit = tableFacade.getLimit();
+		limit.setExportType(JEXCEL);
+        if (limit.isExported()) {
+            export_wwjysqd(tableFacade);
+        }
+	}
+	
+	private void export_wwjysqd(TableFacade tableFacade) {
+		// TODO Auto-generated method stub
+		tableFacade.setColumnProperties("FBillNo","FSourceBillNo","FDate","cpdm","cpmc","cpgg","jldw","fssl","wlph","jgdw","hgsl","jssl","remark","jyfs","zcsl");
+		Table table = tableFacade.getTable();
+		Row row = table.getRow();
+		row.setUniqueProperty("FBillNo");
+		
+		Column hc1 = row.getColumn("FBillNo");
+		hc1.setTitle("单据编号");		
+		
+		Column hc2 = row.getColumn("jyfs");
+		hc2.setTitle("检验方式");
+		
+		Column hc3 = row.getColumn("FDate");
+		hc3.setTitle("单据日期");
+		
+		Column hc4 = row.getColumn("FSourceBillNo");
+		hc4.setTitle("转出单号");
+		
+		Column hc5 = row.getColumn("jgdw");
+		hc5.setTitle("加工单位");
+		
+		Column hc6 = row.getColumn("cpdm");
+		hc6.setTitle("物料代码");
+		
+		Column hc7 = row.getColumn("cpmc");
+		hc7.setTitle("物料名称");
+		
+		Column hc12 = row.getColumn("cpgg");
+		hc12.setTitle("规格型号");
+		
+		Column hc8 = row.getColumn("jldw");
+		hc8.setTitle("单位");
+		
+		Column hc13 = row.getColumn("fssl");
+		hc13.setTitle("送检数量");
+		
+		Column hc15 = row.getColumn("zcsl");
+		hc15.setTitle("转出数量");
+		
+		Column hc9 = row.getColumn("hgsl");
+		hc9.setTitle("合格数量");
+		
+		Column hc14 = row.getColumn("jssl");
+		hc14.setTitle("接收数量");
+		
+		Column hc10 = row.getColumn("wlph");
+		hc10.setTitle("批号");
+		
+		Column hc11 = row.getColumn("remark");
+		hc11.setTitle("备注");
+			
+		
+		tableFacade.render();
 	}
 	
 	
@@ -1599,6 +1683,34 @@ public class KingdeeAction extends BaseAction {
 		return Page.JSONPage;
 	}
 	
+	public Page list_stamp(WebForm form) {
+		QueryObject qo = form.toPo(QueryObject.class);
+		String query = "";
+		if(null!=form.get("query")&&!"".equals(form.get("query").toString()))
+			query = form.get("query").toString();
+		IPageList pageList = kingdeeService.list_stamp(qo, query);
+		form.jsonResult(pageList);
+		return Page.JSONPage;
+	}
+	
+	public Page delete_record_stamp(WebForm form) {
+		if(null!=form.get("sn")&&!"".equals(form.get("sn").toString())){
+			String sn = form.get("sn").toString();
+			kingdeeService.delete_record_stamp(sn);
+		}
+		return success2(form, true, "处理完毕！");
+	}
+	
+	public Page list_zctj(WebForm form){
+		QueryObject qo = form.toPo(QueryObject.class);
+		String query = "";
+		if(null!=form.get("query")&&!"".equals(form.get("query").toString()))
+			query = form.get("query").toString();
+		IPageList pageList = kingdeeService.list_zctj(qo, query);
+		form.jsonResult(pageList);
+		return Page.JSONPage;
+	}
+	
 	public Page insert_thcx(WebForm form){
 		if(null!=form.get("gsth")&&!"".equals(form.get("gsth"))){
 			String IP = ActionContext.getContext().getRequest().getRemoteAddr();
@@ -1984,7 +2096,7 @@ public class KingdeeAction extends BaseAction {
 		IPageList pageList = kingdeeService.report_sczzp(qo,query,begin,end);
 		form.jsonResult(pageList);
 		return Page.JSONPage;
-	} 
+	}
 	
 //-----------------私有方法-------------------//
 	

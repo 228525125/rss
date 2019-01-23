@@ -104,7 +104,7 @@
 			                    layout:'fit',			                    
 			                    height:170,			                     
 			                    html: '<center><IFRAME ID=Q1 WIDTH=780 HEIGHT=600 FRAMEBORDER=0 SCROLLING=NO SRC="kingdee.do?cmd=xiaoshou"/></center>'		                    
-			                },new SellOrderPortalListPanel()/*,new XsckColumnChartPanel(),new XsckPieChartPanel()*/]		                    
+			                }/*,new SellOrderPortalListPanel(),new XsckColumnChartPanel(),new XsckPieChartPanel()*/]		                    
 		                }/*,{
 		                	xtype:'panel',
 		                	border: false,
@@ -373,6 +373,36 @@
 		this.thcx.addListener('click',this.activateTab,this);	
 		this.thcxxt.appendChild(this.thcx);
 		
+		this.jgkzxt = new Ext.tree.TreeNode({
+			id:'jgkzxt',
+			iconCls:'applicationIcon',
+			text:'激光刻字系统'
+		});
+		
+		this.kzcx = new Ext.tree.TreeNode({
+			id:'thcx',
+			iconCls:'gridIcon',
+			text:'刻印数据'
+		});
+		this.kzcx.module = new StampListPanel({id:'list_stamp',title:'刻印数据',iconCls:'gridIcon'});
+		this.kzcx.addListener('click',this.activateTab,this);	
+		this.jgkzxt.appendChild(this.kzcx);
+		
+		this.zctjxt = new Ext.tree.TreeNode({
+			id:'zctjxt',
+			iconCls:'applicationIcon',
+			text:'资产统计'
+		});
+		
+		this.zctj = new Ext.tree.TreeNode({
+			id:'zctj',
+			iconCls:'gridIcon',
+			text:'资产查询'
+		});
+		this.zctj.module = new ZctjListPanel({id:'list_zctj',title:'资产查询',iconCls:'gridIcon'});
+		this.zctj.addListener('click',this.activateTab,this);	
+		this.zctjxt.appendChild(this.zctj);
+		
 		this.cgdjwh = new Ext.tree.TreeNode({
 			id:'cgdjwh',
 			iconCls:'applicationIcon',
@@ -608,6 +638,16 @@
 			border:false
 		});
 		
+		this.jgkzxttree = new Ext.tree.TreePanel({
+			root:this.jgkzxt,
+			border:false
+		});
+		
+		this.zctjtree = new Ext.tree.TreePanel({
+			root:this.zctjxt,
+			border:false
+		});
+		
 		this.cgdjwhtree = new Ext.tree.TreePanel({
 			root:this.cgdjwh,
 			border:false
@@ -668,7 +708,8 @@
                     this.taskhtree,
                     this.aqkctree,
                     this.scbbtree,
-                    this.thcxxttree
+                    this.thcxxttree,
+                    this.jgkzxttree
                 ],
                 iconCls:'cogIcon'
             },{
@@ -698,7 +739,8 @@
                 title:'技术',
                 border:false,
                 items:[
-                    this.jszltree                    
+                    this.jszltree,
+                    this.zctjtree
                 ],
                 iconCls:'docsIcon'
             }]

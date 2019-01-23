@@ -80,6 +80,23 @@ WwjysqdListPanel = Ext.extend(Ext.Panel, {
         	            	},
         	            	scope: this
         	            },'-',{
+        	            	text: '导出',
+        	            	handler: function(){	        	            	        	            			        	            	
+        	            		var begin = '&begin='+this.beginfield.getValue().format('Y-m-d');
+	        	            	var end = '&end='+this.endfield.getValue().format('Y-m-d');
+	        	            	var pageS = '&pageSize='+9999;
+	        	            	var orderBy = '';
+	        	            	var orderType = '';
+	        	            	if(undefined!=this.store.sortInfo){
+	        	            		orderBy = '&orderBy='+this.store.sortInfo.field;
+	        	            		orderType = '&orderType='+this.store.sortInfo.direction;
+	        	            	}
+	        	            	var q = '&query='+this.queryfield.getValue();
+	        	            	var href = "kingdee.do?cmd=export_wwjysqd"+begin+end+pageS+orderBy+orderType+encodeURI(q);
+	        	            	location.href = href;
+        	            	},
+        	            	scope: this
+        	            },'-',{
         	            	text: '重置',
         	            	handler: function(){
         	            		this.beginfield.setValue('');

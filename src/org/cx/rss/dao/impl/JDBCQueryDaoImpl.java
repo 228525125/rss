@@ -10,7 +10,6 @@ import java.util.Map;
 import org.springframework.jdbc.core.CallableStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-
 import org.cx.rss.dao.JDBCQueryDao;
 
 public class JDBCQueryDaoImpl extends JdbcDaoSupport implements JDBCQueryDao {
@@ -82,6 +81,11 @@ public class JDBCQueryDaoImpl extends JdbcDaoSupport implements JDBCQueryDao {
 	public int queryForInt(String sql) {
 		// TODO Auto-generated method stub
 		return getJdbcTemplate().queryForInt(sql);
+	}
+	
+	public void execute(String sql) {
+		// TODO Auto-generated method stub
+		getJdbcTemplate().execute(sql);
 	}
 
 }

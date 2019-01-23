@@ -229,7 +229,7 @@ WorkPlanListPanel = Ext.extend(Ext.Panel, {
 	        	            	var q = '&query='+this.queryfield.getValue();
 	        	            	var href = "kingdee.do?cmd=export_scrw"+begin+end+pageS+orderBy+orderType+encodeURI(q);
 	        	            	
-	        	        　　			location.href = href;
+	        	        　　		location.href = href;
         	            	},
         	            	scope: this
         	            },'-',{

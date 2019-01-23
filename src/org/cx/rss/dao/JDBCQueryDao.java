@@ -20,4 +20,6 @@ public interface JDBCQueryDao {
 	public Object execute(String callName, CallableStatementCallback csc);
 	
 	public int queryForInt(String sql);
+	
+	public void execute(String sql);
 }

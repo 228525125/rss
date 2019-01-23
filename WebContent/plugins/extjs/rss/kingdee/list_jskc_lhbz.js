@@ -12,7 +12,7 @@ JskcLhbzListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_jskc_lhbz',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:["wldm","wlmc","wlgg","wlph","ckmc","jldw","kcsl","lh","bz"],
+			fields:["wldm","wlmc","wlgg","wlph","ckmc","jldw","kcsl","lh","bz","wlth"],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:pgSize}
 	    });
@@ -79,6 +79,12 @@ JskcLhbzListPanel = Ext.extend(Ext.Panel, {
                                 resizable: true,                                
                                 width: 120,
                                 dataIndex: 'wlgg'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '图号',
+                                resizable: true,                                
+                                width: 120,
+                                dataIndex: 'wlth'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '批号',

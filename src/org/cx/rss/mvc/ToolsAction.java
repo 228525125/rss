@@ -176,6 +176,35 @@ public class ToolsAction extends BaseAction {
 		page("coc");
 	}
 	
+	public void coc_wldm(WebForm form){
+		if(null!=form.get("wldm")&&!"".equals(form.get("wldm"))){
+			String wldm = form.get("wldm").toString();			
+			List list = kingdeeService.print_coc_wldm(wldm);
+			if(1==list.size()){
+				Map bean = (Map)list.get(0);
+				form.addPo(bean);
+				String FNumber = bean.get("FNumber").toString();
+				String FName = bean.get("FName").toString();
+				String FHelpCode = bean.get("FHelpCode").toString();
+				String FModel = bean.get("FModel").toString();
+				String caizhi = bean.get("caizhi").toString();
+				
+				form.addResult("FNumber", FNumber);
+				form.addResult("FName", FName);
+				form.addResult("FHelpCode", FHelpCode);
+				form.addResult("FModel", FModel);
+				form.addResult("caizhi", caizhi);
+				
+				kingdeeService.insert_coc(FName, FNumber, FModel, "", "", "", "", "");
+			}else{
+				form.addResult("success", "输入有误，请检查！！！");
+			}
+		}else{
+			form.addResult("success", "输入有误，请检查！！！");
+		}
+		page("coc");
+	}
+	
 	/**
 	 * 合格证输入界面提交到该方法
 	 * @param form
@@ -240,7 +269,7 @@ public class ToolsAction extends BaseAction {
 			lzk = form.get("lzk").toString();
 		}
 		
-		if(!"".equals(wldm)&&!"".equals(wlmc)&&!"".equals(jyry)&&!"".equals(jyrq)){
+		if(!"".equals(wldm)&&!"".equals(wlmc)){
 			kingdeeService.insert_coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk,IP);
 			form.addResult("success", "合格证生成完毕！");
 		}
