@@ -75,6 +75,77 @@ public class ToolsAction extends BaseAction {
 		}
 	}
 	
+	/**
+	 * 合格证输入界面提交到该方法
+	 * @param form
+	 */
+	public void coc1(WebForm form){	
+		String wldm = "";
+		String wlmc = "";
+		String wlgg = "";
+		String gzdh = "";
+		String wlph = "";
+		String jyry = "";
+		String jyrq = "";
+		String fssl = "";
+		String luhao = "";
+		String fangbao = "";
+		String caizhi = "";
+		String beizhu = "";
+		String wlth = "";
+		String lzk = "";
+		String IP = ActionContext.getContext().getRequest().getRemoteAddr();
+		if(null!=form.get("FNumber")&&!"".equals(form.get("FNumber").toString())){
+			wldm = form.get("FNumber").toString();
+		}
+		if(null!=form.get("FName")&&!"".equals(form.get("FName").toString())){
+			wlmc = form.get("FName").toString();
+		}
+		if(null!=form.get("FModel")){
+			wlgg = form.get("FModel").toString();
+		}
+		if(null!=form.get("FICMOBillNo")){
+			gzdh = form.get("FICMOBillNo").toString();
+			form.addResult("note", gzdh);
+		}
+		if(null!=form.get("FBatchNo")){
+			wlph = form.get("FBatchNo").toString();
+		}
+		if(null!=form.get("FUser")&&!"".equals(form.get("FUser").toString())){
+			jyry = form.get("FUser").toString();
+		}
+		if(null!=form.get("FDate")&&!"".equals(form.get("FDate").toString())){
+			jyrq = form.get("FDate").toString();
+		}
+		if(null!=form.get("FQty")&&!"".equals(form.get("FQty").toString())){
+			fssl = form.get("FQty").toString();
+		}
+		if(null!=form.get("luhao")&&!"".equals(form.get("luhao").toString())){
+			luhao = form.get("luhao").toString();
+		}
+		if(null!=form.get("fangbao")&&!"".equals(form.get("fangbao").toString())){
+			fangbao = form.get("fangbao").toString();
+		}
+		if(null!=form.get("caizhi")&&!"".equals(form.get("caizhi").toString())){
+			caizhi = form.get("caizhi").toString();
+		}
+		if(null!=form.get("beizhu")&&!"".equals(form.get("beizhu").toString())){
+			beizhu = form.get("beizhu").toString();
+		}
+		if(null!=form.get("FHelpCode")&&!"".equals(form.get("FHelpCode").toString())){
+			wlth = form.get("FHelpCode").toString();
+		}
+		if(null!=form.get("lzk")&&!"".equals(form.get("lzk").toString())){
+			lzk = form.get("lzk").toString();
+		}
+		
+		if(!"".equals(wldm)&&!"".equals(wlmc)){
+			kingdeeService.insert_coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk,IP);
+			form.addResult("success", "合格证生成完毕！");
+		}
+		page("coc");
+	}
+	
 	public void coc_scrw(WebForm form){		
 		if(null!=form.get("djbh")&&!"".equals(form.get("djbh"))){
 			String djbh = form.get("djbh").toString();			
@@ -201,77 +272,6 @@ public class ToolsAction extends BaseAction {
 			}
 		}else{
 			form.addResult("success", "输入有误，请检查！！！");
-		}
-		page("coc");
-	}
-	
-	/**
-	 * 合格证输入界面提交到该方法
-	 * @param form
-	 */
-	public void coc1(WebForm form){	
-		String wldm = "";
-		String wlmc = "";
-		String wlgg = "";
-		String gzdh = "";
-		String wlph = "";
-		String jyry = "";
-		String jyrq = "";
-		String fssl = "";
-		String luhao = "";
-		String fangbao = "";
-		String caizhi = "";
-		String beizhu = "";
-		String wlth = "";
-		String lzk = "";
-		String IP = ActionContext.getContext().getRequest().getRemoteAddr();
-		if(null!=form.get("FNumber")&&!"".equals(form.get("FNumber").toString())){
-			wldm = form.get("FNumber").toString();
-		}
-		if(null!=form.get("FName")&&!"".equals(form.get("FName").toString())){
-			wlmc = form.get("FName").toString();
-		}
-		if(null!=form.get("FModel")){
-			wlgg = form.get("FModel").toString();
-		}
-		if(null!=form.get("FICMOBillNo")){
-			gzdh = form.get("FICMOBillNo").toString();
-			form.addResult("note", gzdh);
-		}
-		if(null!=form.get("FBatchNo")){
-			wlph = form.get("FBatchNo").toString();
-		}
-		if(null!=form.get("FUser")&&!"".equals(form.get("FUser").toString())){
-			jyry = form.get("FUser").toString();
-		}
-		if(null!=form.get("FDate")&&!"".equals(form.get("FDate").toString())){
-			jyrq = form.get("FDate").toString();
-		}
-		if(null!=form.get("FQty")&&!"".equals(form.get("FQty").toString())){
-			fssl = form.get("FQty").toString();
-		}
-		if(null!=form.get("luhao")&&!"".equals(form.get("luhao").toString())){
-			luhao = form.get("luhao").toString();
-		}
-		if(null!=form.get("fangbao")&&!"".equals(form.get("fangbao").toString())){
-			fangbao = form.get("fangbao").toString();
-		}
-		if(null!=form.get("caizhi")&&!"".equals(form.get("caizhi").toString())){
-			caizhi = form.get("caizhi").toString();
-		}
-		if(null!=form.get("beizhu")&&!"".equals(form.get("beizhu").toString())){
-			beizhu = form.get("beizhu").toString();
-		}
-		if(null!=form.get("FHelpCode")&&!"".equals(form.get("FHelpCode").toString())){
-			wlth = form.get("FHelpCode").toString();
-		}
-		if(null!=form.get("lzk")&&!"".equals(form.get("lzk").toString())){
-			lzk = form.get("lzk").toString();
-		}
-		
-		if(!"".equals(wldm)&&!"".equals(wlmc)){
-			kingdeeService.insert_coc1(wlmc, wldm, wlgg, gzdh, wlph, jyry, jyrq,fssl,luhao,fangbao,caizhi,beizhu,wlth,lzk,IP);
-			form.addResult("success", "合格证生成完毕！");
 		}
 		page("coc");
 	}
