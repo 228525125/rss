@@ -43,10 +43,10 @@ public class Task extends TimerTask {
 			String ipAddress = ks.getLastPublicIp();
 			if(!result.equals(ipAddress)){
 				ks.insert_public_ip(result);
-				SendMailUtil.sendQQMail("PublicNetworkIP", result);
+				SendMailUtil.sendQQMail("九环公网IP地址发生改变", result);
 			}
 		}else{
-			SendMailUtil.sendQQMail("PublicNetworkIP", "Web site '"+uri+"' cannot resolve public network IP address");
+			SendMailUtil.sendQQMail("公网IP解析出错", "请注意：Web 站点 '"+uri+"' 不能正确解析公网IP地址！");
 		}
 		
 		/*
