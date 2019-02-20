@@ -14,6 +14,11 @@
 		<param-value>2014-06-30</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>PublicNetworkIPSite</param-name>
+		<param-value>http://www.3322.org/dyndns/getip</param-value>
+	</context-param>
+	
 	<!--定义easyjweb的配置文件位置 -->
 	<context-param>
 		<param-name>easyjwebConfigLocation</param-name>
@@ -82,9 +87,9 @@
 	    <servlet-name>TaskServlet</servlet-name>
 	    <servlet-class>org.cx.rss.servlet.TaskServlet</servlet-class>
 	    <load-on-startup>2</load-on-startup>
-	  </servlet>
-	  <servlet-mapping>
+	</servlet>
+	<servlet-mapping>
 	    <servlet-name>TaskServlet</servlet-name>
 	    <url-pattern>/TaskServlet</url-pattern>
-	  </servlet-mapping>
+ 	</servlet-mapping>
 </web-app>
