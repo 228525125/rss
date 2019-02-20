@@ -38,6 +38,7 @@ public class Task extends TimerTask {
 		 */
 		String uri = sc.getInitParameter("PublicNetworkIPSite");
 		String result = HttpClient.getPublicNetworkIP(uri);
+		System.out.println(result);
 		if(isboolIp(filterIp(result))){
 			String ipAddress = ks.getLastPublicIp();
 			if(!result.equals(ipAddress)){

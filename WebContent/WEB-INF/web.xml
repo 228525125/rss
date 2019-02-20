@@ -19,6 +19,11 @@
 		<param-value>http://www.3322.org/dyndns/getip</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>TaskIntervalTime</param-name>      <!-- 任务执行间隔周期（分） -->
+		<param-value>10</param-value>
+	</context-param>
+	
 	<!--定义easyjweb的配置文件位置 -->
 	<context-param>
 		<param-name>easyjwebConfigLocation</param-name>
