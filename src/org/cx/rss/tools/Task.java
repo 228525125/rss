@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 
@@ -31,8 +33,30 @@ public class Task extends TimerTask {
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
 		
+		/*
+		 * 当公网IP地址发生改变时，将新的IP地址发送到指定邮箱
+		 */
+		String uri = sc.getInitParameter("PublicNetworkIPSite");
+		String result = HttpClient.getPublicNetworkIP(uri);
+		if(isboolIp(filterIp(result))){
+			String ipAddress = ks.getLastPublicIp();
+			if(!result.equals(ipAddress)){
+				ks.insert_public_ip(result);
+				SendMailUtil.sendQQMail("PublicNetworkIP", result);
+			}
+		}else{
+			SendMailUtil.sendQQMail("PublicNetworkIP", "Web site '"+uri+"' cannot resolve public network IP address");
+		}
+		
+		/*
+		 * 自动结案，现在委托给sqlserver代理完成
+		 */
+		/*System.out.println("task time:"+df.format(date)+"exec close_scrw");
+		ks.exec_close_scrw();
+		System.out.println("task time:"+df.format(date)+"exec close_scrw end");*/
+		
 		/*if(7 == date.getHours()){       // 早上7点执行
-			
+		
 		}
 		
 		if(12 == date.getHours()){       // 中午12点执行
@@ -42,28 +66,35 @@ public class Task extends TimerTask {
 		if(18 == date.getHours()){       // 下午6点执行
 			
 		}*/	
-		
-		/*
-		 * 发送公网IP地址到指定邮箱
-		 */
-		System.out.println("task time:"+df.format(date)+"send mail");
-		String uri = sc.getInitParameter("PublicNetworkIPSite");
-		String resutl = HttpClient.getPublicNetworkIP(uri);
-		SendMailUtil.sendQQMail("PublicNetworkIP", resutl);
-		System.out.println("task time:"+df.format(date)+"send mail end");
-		
-		/*
-		 * 自动结案，现在委托给sqlserver代理完成
-		 */
-		/*System.out.println("task time:"+df.format(date)+"exec close_scrw");
-		ks.exec_close_scrw();
-		System.out.println("task time:"+df.format(date)+"exec close_scrw end");*/
 	}
 	
 	public static void main(String[] args) {
-		Date date = new Date(System.currentTimeMillis());
+		/*Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		System.out.println(df.format(date));
+		System.out.println(df.format(date));*/
+		String ip = "27.9.1124.257\n";
+		System.out.println(isboolIp(ip));
+		
+		
+		
 	}
+	
+	public static String filterIp(String ipAddress) {
+		String result = "";
+		Pattern p = Pattern.compile("(?<=//|)((\\w)+\\.)+\\w+");
+		Matcher matcher = p.matcher(ipAddress);
+		if (matcher.find()) {
+			result = matcher.group();
+		}
+		return result;
+	}
+	
+	 /** * 判断是否为合法IP * @return the ip */  
+    public static boolean isboolIp(String ipAddress) {  
+        String ip = "([1-9]|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";   
+        Pattern pattern = Pattern.compile(ip);  
+        Matcher matcher = pattern.matcher(ipAddress);  
+        return matcher.matches();  
+    }  
 
 }

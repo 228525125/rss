@@ -1178,4 +1178,16 @@ public interface IKingdeeService {
 	
 	public void updateForSQL(String sql);
 	
+	/**
+	 * 插入新的公网IP地址
+	 * @param ipAddress
+	 */
+	public void insert_public_ip(String ipAddress);
+
+	/**
+	 * 获取最后一次记录的公网IP地址
+	 * @return
+	 */
+	public String getLastPublicIp();
+	
 }

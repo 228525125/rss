@@ -988,4 +988,16 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		kingdeeDao.update(sql);
 	}
 	
+	public String getLastPublicIp() {
+		// TODO Auto-generated method stub
+		String sql = "select top 1 ip from public_ip order by date desc";
+		return (String) rssDao.queryForObject(sql, String.class);
+	}
+	
+	public void insert_public_ip(String ipAddress) {
+		// TODO Auto-generated method stub
+		String sql = "insert public_ip (ip,date) values ('"+ipAddress+"',Convert(char(19),getdate(),120))";
+		rssDao.update(sql);
+	}
+	
 }

@@ -15,6 +15,6 @@ public class TaskServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Task task = new Task(config.getServletContext());
 		Timer timer = new Timer();
-		timer.schedule(task, 5000,1000*60*60*5);      //一小时执行一次
+		timer.schedule(task, 5000,1000*60);      //一分钟执行一次
 	}
 }
