@@ -39,14 +39,15 @@ public class Task extends TimerTask {
 		String uri = sc.getInitParameter("PublicNetworkIPSite");
 		String result = HttpClient.getPublicNetworkIP(uri);
 		System.out.println(result);
-		if(isboolIp(filterIp(result))){
+		result = filterIp(result);
+		if(isboolIp(result)){
 			String ipAddress = ks.getLastPublicIp();
 			if(!result.equals(ipAddress)){
 				ks.insert_public_ip(result);
-				SendMailUtil.sendQQMail("九环公网IP地址发生改变", result);
+				SendMailUtil.sendQQMail("九环公网IP地址发生改变-"+result, result+"，"+df.format(date));
 			}
 		}else{
-			SendMailUtil.sendQQMail("公网IP解析出错", "请注意：Web 站点 '"+uri+"' 不能正确解析公网IP地址！");
+			//SendMailUtil.sendQQMail("公网IP解析出错", "请注意：Web 站点 '"+uri+"' 不能正确解析公网IP地址！");
 		}
 		
 		/*
