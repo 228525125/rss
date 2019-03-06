@@ -1,5 +1,5 @@
 ﻿/**
- * 生产消耗表报
+ * 生产消耗表报(实际使用的是report_scxhhz.js)
  */
 WorkConsumeReportPanel = Ext.extend(Ext.Panel, {
     layout: 'border',

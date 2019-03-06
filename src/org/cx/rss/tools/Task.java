@@ -31,7 +31,7 @@ public class Task extends TimerTask {
 		ApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(sc);
 		IKingdeeService ks = (IKingdeeService) context.getBean("kingdeeService");
 		Date date = new Date(System.currentTimeMillis());
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		/*
 		 * 当公网IP地址发生改变时，将新的IP地址发送到指定邮箱
@@ -40,6 +40,9 @@ public class Task extends TimerTask {
 		String result = HttpClient.getPublicNetworkIP(uri);
 		System.out.println(result);
 		result = filterIp(result);
+		
+		//SendMailUtil.sendQQMail("九环公网IP地址发生改变-"+result, result+"，"+df.format(date));
+		
 		if(isboolIp(result)){
 			String ipAddress = ks.getLastPublicIp();
 			if(!result.equals(ipAddress)){
@@ -77,7 +80,9 @@ public class Task extends TimerTask {
 		String ip = "27.9.1124.257\n";
 		System.out.println(isboolIp(ip));
 		
-		
+		String uri = "http://www.3322.org/dyndns/getip";
+		String result = HttpClient.getPublicNetworkIP(uri);
+		System.out.println(result);
 		
 	}
 	
