@@ -7,6 +7,8 @@ import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.ServletContext;
 
 import org.cx.rss.dao.IKingdeeDao;
@@ -41,13 +43,20 @@ public class Task extends TimerTask {
 		System.out.println(result);
 		result = filterIp(result);
 		
-		//SendMailUtil.sendQQMail("九环公网IP地址发生改变-"+result, result+"，"+df.format(date));
-		
 		if(isboolIp(result)){
 			String ipAddress = ks.getLastPublicIp();
 			if(!result.equals(ipAddress)){
-				ks.insert_public_ip(result);
-				SendMailUtil.sendQQMail("九环公网IP地址发生改变-"+result, result+"，"+df.format(date));
+				try {
+					SendMailUtil.sendQQMail("九环公网IP地址发生改变-"+result, result+"，"+df.format(date));
+					System.out.println("邮件发送成功！");
+					ks.insert_public_ip(result);
+				} catch (AddressException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}else{
 			//SendMailUtil.sendQQMail("公网IP解析出错", "请注意：Web 站点 '"+uri+"' 不能正确解析公网IP地址！");

@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMultipart;
 
 public class SendMailUtil {
 	
-    public static void sendQQMail(String subject, String context) {
+    public static void sendQQMail(String subject, String context) throws AddressException, MessagingException {
         Properties properties = new Properties();
         properties.put("mail.transport.protocol", "smtp");// 连接协议
         properties.put("mail.smtp.host", "smtp.qq.com");// 主机名
@@ -32,29 +32,21 @@ public class SendMailUtil {
         // 获取邮件对象
         Message message = new MimeMessage(session);
         // 设置发件人邮箱地址
-        try {
-			message.setFrom(new InternetAddress("228525125@qq.com"));
-			// 设置收件人邮箱地址 
-	        message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("cqjhjd@yeah.net")});
-	        //message.setRecipient(Message.RecipientType.TO, new InternetAddress("xxx@qq.com"));//一个收件人
-	        // 设置邮件标题
-	        message.setSubject(subject);
-	        // 设置邮件内容
-	        message.setText(context);
-	        // 得到邮差对象
-	        Transport transport = session.getTransport();
-	        // 连接自己的邮箱账户
-	        transport.connect("228525125@qq.com", "jiuhuan123123");// 密码为QQ邮箱开通的stmp服务后得到的客户端授权码
-	        // 发送邮件
-	        transport.sendMessage(message, message.getAllRecipients());
-	        transport.close();
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        message.setFrom(new InternetAddress("228525125@qq.com"));
+		// 设置收件人邮箱地址 
+        message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("cqjhjd@yeah.net")});
+        //message.setRecipient(Message.RecipientType.TO, new InternetAddress("xxx@qq.com"));//一个收件人
+        // 设置邮件标题
+        message.setSubject(subject);
+        // 设置邮件内容
+        message.setText(context);
+        // 得到邮差对象
+        Transport transport = session.getTransport();
+        // 连接自己的邮箱账户
+        transport.connect("228525125@qq.com", "jiuhuan123123");// 密码为QQ邮箱开通的stmp服务后得到的客户端授权码
+        // 发送邮件
+        transport.sendMessage(message, message.getAllRecipients());
+        transport.close();
     }
     
     /*static String HOST = ""; // smtp服务器
