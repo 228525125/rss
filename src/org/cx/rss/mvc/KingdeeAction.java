@@ -2098,6 +2098,92 @@ public class KingdeeAction extends BaseAction {
 		return Page.JSONPage;
 	}
 	
+	public Page list_item(WebForm form) {
+		QueryObject qo = form.toPo(QueryObject.class);
+		String code = "";
+		if(null!=form.get("query")&&!"".equals(form.get("query").toString())){
+			code = form.get("query").toString();
+		}
+		IPageList pageList = kingdeeService.list_item(qo, code);
+		form.jsonResult(pageList);
+		return Page.JSONPage;
+	}
+	
+	public Page list_supplier(WebForm form) {
+		QueryObject qo = form.toPo(QueryObject.class);
+		String name = "";
+		if(null!=form.get("query")&&!"".equals(form.get("query").toString())){
+			name = form.get("query").toString();
+		}
+		IPageList pageList = kingdeeService.list_supplier(qo,name);
+		form.jsonResult(pageList);
+		return Page.JSONPage;
+	}
+	
+	public Page list_hggys(WebForm form) {
+		QueryObject qo = form.toPo(QueryObject.class);
+		Integer itemId = 0;
+		if(null!=form.get("itemId")&&!"".equals(form.get("itemId").toString())){
+			itemId = Integer.valueOf(form.get("itemId").toString());
+		}
+		IPageList pageList = kingdeeService.list_hggys(qo, itemId);
+		form.jsonResult(pageList);
+		return Page.JSONPage;
+	}
+	
+	public Page save_hggys(WebForm form) {
+		if(null!=form.get("id")&&!"".equals(form.get("id"))){
+			Integer id = Integer.valueOf(form.get("id").toString());
+			Integer supplierId = Integer.valueOf(form.get("supplierId").toString());
+			Boolean def = Boolean.valueOf(form.get("default").toString());
+			
+			kingdeeService.update_hggys(id, supplierId, def);
+		}else{
+			Integer itemId = Integer.valueOf(form.get("itemId").toString());
+			Integer supplierId = Integer.valueOf(form.get("supplierId").toString());
+			Boolean checked = Boolean.valueOf(form.get("checked").toString());
+			Boolean def = Boolean.valueOf(form.get("default").toString());
+			if(kingdeeService.isInsert_hggys(itemId, supplierId))
+				kingdeeService.insert_hggys(itemId, supplierId, checked, def);
+			else
+				return success(form, true, null, "公司图号重复，请检查！");
+		}
+		
+		return success(form, true, null, "保存成功！");
+	}
+	
+	public Page check_hggys(WebForm form) {
+		Object resp = form.get("resp");
+		JSONParser parser = new JSONParser();
+		JSONObject obj;
+		try {
+			obj = (JSONObject) parser.parse(resp.toString());
+			JSONArray list = (JSONArray) obj.get("rows");
+			for(Object jboj : list){
+				JSONObject row = (JSONObject) jboj;
+				try{
+					Integer id = new Integer(CommUtil.null2String(row.get("id")));
+					Boolean checked = new Boolean(CommUtil.null2String(row.get("checked")));
+					kingdeeService.check_hggys(id, checked);
+				} catch(java.lang.NumberFormatException e){
+					continue;
+				}
+			}
+		} catch (org.json.simple.parser.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return success2(form, true, "处理完毕！");
+	}
+	
+	public Page tree_item(WebForm form){
+		if(null!=form.get("itemId")&&!"".equals(form.get("itemId").toString())){    //根据机构和上级部门编号获取下级部门列表
+			Integer did = new Integer(form.get("itemId").toString());
+			form.addResult("json", kingdeeService.loadTree(did));			
+		}
+		return getJsonByPage();
+	}
+	
 //-----------------私有方法-------------------//
 	
 	private void export_aqkc(TableFacade tableFacade) {

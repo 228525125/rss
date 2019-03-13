@@ -645,6 +645,85 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		String totalsql = "execute list_cpjysqd_count '"+query+"','"+begin+"','"+end+"','"+status+"','"+style+"','"+qo.getOrderBy()+"','"+qo.getOrderType()+"'";
 		return QueryUtil.query(qo, totalsql, sql, true, jdbcDao);
 	}
+	
+	public String loadTree(Integer itemId) {
+		// TODO Auto-generated method stub
+		String result = "[";
+		String sql = "select a.FItemID,a.FNumber,a.FName,a.FParentID,a.FDetail from t_item a left join t_ICItem b on a.FItemID=b.FItemID where a.FItemClassID=4 and (b.FDeleted is null or b.FDeleted=0) and a.FParentID="+itemId+" order by a.FNumber";
+		List list = kingdeeDao.queryForList(sql);
+		for(int i=0;i<list.size();i++){
+			Map bean = (Map) list.get(i);
+			String id = "'"+bean.get("FItemID").toString()+"'";
+			result += "{id:"+id+",text:'"+"("+bean.get("FNumber")+")"+bean.get("FName")+"',";
+			Boolean isLeaf = (Boolean) bean.get("FDetail");
+			if(isLeaf)
+				result += "leaf:true}";
+			else
+				result += "leaf:false}";
+			if(i<list.size()-1)
+				result += ",";
+		}
+		return result+"]";
+	}
+	
+	/*private boolean isLeaf(Integer nodeId){
+		String sql = "select 1 from t_item a left join t_ICItem b on a.FItemID=b.FItemID where a.FItemClassID=4 and (b.FDeleted is null or b.FDeleted=0) and a.FParentID="+nodeId;
+		List list = kingdeeDao.queryForList(sql);
+		return list.isEmpty();
+	}*/
+	
+	public IPageList list_item(QueryObject qo, String code) {
+		String sql = "select FItemID as 'id', FNumber as 'code', FName as 'name' from t_ICItem where FDeleted=0 and FNumber like '"+code+"%' order by FNumber";
+		String total = "select count(1) from t_ICItem where FDeleted=0";
+		return QueryUtil.query(qo, total, sql, true, jdbcDao);
+	}
+	
+	public IPageList list_supplier(QueryObject qo, String name) {
+		// TODO Auto-generated method stub
+		String sql = "select FItemID as 'id',FNumber as 'code',FName as 'name' from t_supplier where FDeleted=0 and FName like '%"+name+"%'";
+		String total = "select count(1) from t_supplier where FDeleted=0";
+		return QueryUtil.query(qo, total, sql, true, jdbcDao);
+	}
+	
+	public IPageList list_hggys(QueryObject qo, Integer itemId) {
+		// TODO Auto-generated method stub
+		String sql = "select a.id,b.FName as 'itemName',b.FItemID as 'itemId',a.supplierId,c.FNumber as 'code',c.FName as 'name',a.checked,a.date,a.[default] from rss.dbo.supplier_check a "
+				+ "left join t_ICItem b on a.itemId=b.FItemID "
+				+ "left join t_supplier c on a.supplierId=c.FItemID "
+				+ "where a.itemID="+itemId;
+		String total = "select count(1) from rss.dbo.supplier_check where itemID="+itemId;
+		return QueryUtil.query(qo, total, sql, true, jdbcDao);
+	}
+	
+	public void insert_hggys(Integer itemId, Integer supplierId,
+			Boolean checked, Boolean def) {
+		// TODO Auto-generated method stub
+		Integer c = checked ? 1 : 0;
+		Integer d = def ? 1 : 0; 
+		String sql = "insert supplier_check (itemID,supplierId,checked,date,[default]) values (?,?,?,getdate(),?)";
+		rssDao.update(sql, new Object[]{itemId,supplierId,c,d});
+	}
+	
+	public Boolean isInsert_hggys(Integer itemId, Integer supplierId) {
+		// TODO Auto-generated method stub
+		String sql = "select 1 from supplier_check where itemId="+itemId+" and supplierId="+supplierId;
+		List list = rssDao.queryForList(sql);
+		return list.isEmpty();
+	}
+	
+	public void update_hggys(Integer id, Integer supplierId, Boolean def) {
+		// TODO Auto-generated method stub
+		Integer d = def ? 1 : 0;
+		String sql = "update supplier_check set supplierId=?, [default]=? where id=?";
+		rssDao.update(sql, new Object[]{supplierId,d,id});
+	}
+	
+	public void check_hggys(Integer id, Boolean checked) {
+		// TODO Auto-generated method stub
+		Integer c = checked ? 1 :0 ;
+		String sql = "update supplier_check set checked="+c+" where id="+id;
+		rssDao.update(sql);
+	}
 
 	public void copy_cpjyd(String jydh, String interid, String entryid, String sqsl, String wlph, String FICMOInterID) {
 		// TODO Auto-generated method stub
@@ -689,8 +768,6 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		String totalsql = "execute list_task_wgrk_count '"+user+"','"+query+"','"+begin+"','"+end+"'";
 		return QueryUtil.query(qo, totalsql, sql, true, jdbcDao);
 	}
-	
-	
 	
 	public int count_task_cgsq(String user, String begin,
 			String end) {

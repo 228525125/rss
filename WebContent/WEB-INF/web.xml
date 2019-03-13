@@ -85,7 +85,7 @@
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-	
+	<!-- 
 	<servlet>
 	    <description></description>
 	    <display-name>TaskServlet</display-name>
@@ -97,4 +97,5 @@
 	    <servlet-name>TaskServlet</servlet-name>
 	    <url-pattern>/TaskServlet</url-pattern>
  	</servlet-mapping>
+ 	 -->
 </web-app>

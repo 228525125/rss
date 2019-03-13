@@ -476,7 +476,7 @@
 			id:'report_cg',
 			iconCls:'applicationIcon',
 			text:'采购统计报表'
-		});
+		});		
 		
 		this.cgwkp = new Ext.tree.TreeNode({
 			id:'cgwkp',
@@ -486,6 +486,21 @@
 		this.cgwkp.module = new CgwkpListPanel({id:'list_cgwkp',title:'外购未开票统计',iconCls:'gridIcon'});
 		this.cgwkp.addListener('click',this.activateTab,this);	
 		this.cgtj.appendChild(this.cgwkp);
+		
+		this.gys = new Ext.tree.TreeNode({
+			id:'gys',
+			iconCls:'applicationIcon',
+			text:'供应商'
+		});
+		
+		this.hggys = new Ext.tree.TreeNode({
+			id:'hggys',
+			iconCls:'gridIcon',
+			text:'合格供应商维护'
+		});
+		this.hggys.module = new HggysListPanel({id:'list_hggys',title:'合格供应商维护',iconCls:'gridIcon'});
+		this.hggys.addListener('click',this.activateTab,this);
+		this.gys.appendChild(this.hggys);
 		
 		this.zldjwh = new Ext.tree.TreeNode({
 			id:'zldjwh',
@@ -658,6 +673,11 @@
 			border:false
 		});
 		
+		this.gystree = new Ext.tree.TreePanel({
+			root:this.gys,
+			border:false
+		});
+		
 		this.zldjwhtree = new Ext.tree.TreePanel({
 			root:this.zldjwh,
 			border:false
@@ -717,7 +737,8 @@
                 border:false,
                 items:[
                     this.cgdjwhtree,      
-                    this.cgtjtree
+                    this.cgtjtree,
+                    this.gystree
                 ],
                 iconCls:'gearsIcon'
             },{

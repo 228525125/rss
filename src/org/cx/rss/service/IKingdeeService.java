@@ -1189,5 +1189,26 @@ public interface IKingdeeService {
 	 * @return
 	 */
 	public String getLastPublicIp();
+
+	/**
+	 * 用于物料目录树
+	 * @param itemId
+	 * @return
+	 */
+	public String loadTree(Integer itemId);
+	
+	public IPageList list_item(QueryObject qo, String code);
+	
+	public IPageList list_supplier(QueryObject qo, String name);
+	
+	public IPageList list_hggys(QueryObject qo, Integer itemId);
+	
+	public void update_hggys(Integer id, Integer supplierId, Boolean def);
+	
+	public Boolean isInsert_hggys(Integer itemId, Integer supplierId);
+	
+	public void insert_hggys(Integer itemId, Integer supplierId, Boolean checked, Boolean def);
+	
+	public void check_hggys(Integer id, Boolean checked);
 	
 }
