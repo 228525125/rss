@@ -1201,13 +1201,15 @@ public interface IKingdeeService {
 	
 	public IPageList list_supplier(QueryObject qo, String name);
 	
+	public IPageList list_oper(QueryObject qo, String name);
+	
 	public IPageList list_hggys(QueryObject qo, Integer itemId);
 	
-	public void update_hggys(Integer id, Integer supplierId, Boolean def);
+	public void update_hggys(Integer id, Integer supplierId, Integer operId, Boolean def);
 	
-	public Boolean isInsert_hggys(Integer itemId, Integer supplierId);
+	public Boolean isInsert_hggys(Integer itemId, Integer supplierId, Integer operId);
 	
-	public void insert_hggys(Integer itemId, Integer supplierId, Boolean checked, Boolean def);
+	public void insert_hggys(Integer itemId, Integer supplierId, Integer operId, Boolean checked, Boolean def);
 	
 	public void check_hggys(Integer id, Boolean checked);
 	

@@ -685,6 +685,12 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		return QueryUtil.query(qo, total, sql, true, jdbcDao);
 	}
 	
+	public IPageList list_oper(QueryObject qo, String name) {
+		// TODO Auto-generated method stub
+		/
+		return null;
+	}
+	
 	public IPageList list_hggys(QueryObject qo, Integer itemId) {
 		// TODO Auto-generated method stub
 		String sql = "select a.id,b.FName as 'itemName',b.FItemID as 'itemId',a.supplierId,c.FNumber as 'code',c.FName as 'name',a.checked,a.date,a.[default] from rss.dbo.supplier_check a "
@@ -695,27 +701,27 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		return QueryUtil.query(qo, total, sql, true, jdbcDao);
 	}
 	
-	public void insert_hggys(Integer itemId, Integer supplierId,
+	public void insert_hggys(Integer itemId, Integer supplierId, Integer operId,
 			Boolean checked, Boolean def) {
 		// TODO Auto-generated method stub
 		Integer c = checked ? 1 : 0;
 		Integer d = def ? 1 : 0; 
-		String sql = "insert supplier_check (itemID,supplierId,checked,date,[default]) values (?,?,?,getdate(),?)";
-		rssDao.update(sql, new Object[]{itemId,supplierId,c,d});
+		String sql = "insert supplier_check (itemID,supplierId,checked,date,[default],operId) values (?,?,?,getdate(),?,?)";
+		rssDao.update(sql, new Object[]{itemId,supplierId,c,d,operId});
 	}
 	
-	public Boolean isInsert_hggys(Integer itemId, Integer supplierId) {
+	public Boolean isInsert_hggys(Integer itemId, Integer supplierId, Integer operId) {
 		// TODO Auto-generated method stub
-		String sql = "select 1 from supplier_check where itemId="+itemId+" and supplierId="+supplierId;
+		String sql = "select 1 from supplier_check where itemId="+itemId+" and supplierId="+supplierId+" and operId="+operId;
 		List list = rssDao.queryForList(sql);
 		return list.isEmpty();
 	}
 	
-	public void update_hggys(Integer id, Integer supplierId, Boolean def) {
+	public void update_hggys(Integer id, Integer supplierId, Integer operId, Boolean def) {
 		// TODO Auto-generated method stub
 		Integer d = def ? 1 : 0;
-		String sql = "update supplier_check set supplierId=?, [default]=? where id=?";
-		rssDao.update(sql, new Object[]{supplierId,d,id});
+		String sql = "update supplier_check set supplierId=?, operId=?, [default]=? where id=?";
+		rssDao.update(sql, new Object[]{supplierId,operId,d,id});
 	}
 	
 	public void check_hggys(Integer id, Boolean checked) {

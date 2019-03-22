@@ -2120,6 +2120,17 @@ public class KingdeeAction extends BaseAction {
 		return Page.JSONPage;
 	}
 	
+	public Page list_oper(WebForm form) {
+		QueryObject qo = form.toPo(QueryObject.class);
+		String name = "";
+		if(null!=form.get("query")&&!"".equals(form.get("query").toString())){
+			name = form.get("query").toString();
+		}
+		IPageList pageList = kingdeeService.list_oper(qo,name);
+		form.jsonResult(pageList);
+		return Page.JSONPage;
+	}
+	
 	public Page list_hggys(WebForm form) {
 		QueryObject qo = form.toPo(QueryObject.class);
 		Integer itemId = 0;
@@ -2135,16 +2146,18 @@ public class KingdeeAction extends BaseAction {
 		if(null!=form.get("id")&&!"".equals(form.get("id"))){
 			Integer id = Integer.valueOf(form.get("id").toString());
 			Integer supplierId = Integer.valueOf(form.get("supplierId").toString());
+			Integer operId = Integer.valueOf(form.get("operId").toString());
 			Boolean def = Boolean.valueOf(form.get("default").toString());
 			
-			kingdeeService.update_hggys(id, supplierId, def);
+			kingdeeService.update_hggys(id, supplierId, operId, def);
 		}else{
 			Integer itemId = Integer.valueOf(form.get("itemId").toString());
 			Integer supplierId = Integer.valueOf(form.get("supplierId").toString());
+			Integer operId = Integer.valueOf(form.get("operId").toString());
 			Boolean checked = Boolean.valueOf(form.get("checked").toString());
 			Boolean def = Boolean.valueOf(form.get("default").toString());
-			if(kingdeeService.isInsert_hggys(itemId, supplierId))
-				kingdeeService.insert_hggys(itemId, supplierId, checked, def);
+			if(kingdeeService.isInsert_hggys(itemId, supplierId, operId))
+				kingdeeService.insert_hggys(itemId, supplierId, operId, checked, def);
 			else
 				return success(form, true, null, "公司图号重复，请检查！");
 		}

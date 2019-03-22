@@ -6,7 +6,8 @@ HggysListPanel = Ext.extend(Ext.Panel, {
     createForm:function(){
 		if(!this.fp||null==this.fp){
 			this.fp = new HggysFormPanel({
-				supplierStore : this.supplierStore
+				supplierStore : this.supplierStore,
+				operStore : this.operStore
 			});
 			if(0!=this.itemId){
 				this.fp.form.findField("itemName").setValue(this.itemName);
@@ -82,6 +83,7 @@ HggysListPanel = Ext.extend(Ext.Panel, {
 		this.fp.form.findField("itemName").setValue(record.get("itemName"));
 		this.fp.form.findField("itemId").setValue(record.get("itemId"));
 		this.fp.form.findField("supplierId").setValue(record.get("supplierId"));
+		this.fp.form.findField("operId").setValue(record.get("operId"));
 		
 	},
     initComponent: function() {
@@ -89,7 +91,7 @@ HggysListPanel = Ext.extend(Ext.Panel, {
 		this.store = new Ext.data.JsonStore({
 			url: 'kingdee.do?cmd=list_hggys',
 			root:"result",
-			fields:["id","itemName","itemId","supplierId","code","name","checked","date","default"],
+			fields:["id","itemName","itemId","supplierId","code","name","checked","date","default","operId","operName"],
 			listeners:{
 				'beforeload': {fn:function(storeThis,option){
 					storeThis.removeAll();
@@ -111,6 +113,13 @@ HggysListPanel = Ext.extend(Ext.Panel, {
 		
 		this.supplierStore = new Ext.data.JsonStore({
 			url: 'kingdee.do?cmd=list_supplier',
+			root:"result",
+			fields:["id","code","name"],
+			baseParams:{pageSize:1000}
+		});
+		
+		this.operStore = new Ext.data.JsonStore({
+			url: 'kingdee.do?cmd=list_oper',
 			root:"result",
 			fields:["id","code","name"],
 			baseParams:{pageSize:1000}

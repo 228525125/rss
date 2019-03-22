@@ -1,6 +1,6 @@
 HggysFormPanel = Ext.extend(Ext.form.FormPanel,{
 	width: 343,
-    height: 305,
+    height: 325,
     padding: 10,
     labelWidth: 70,
     labelAlign: 'right',
@@ -35,6 +35,21 @@ HggysFormPanel = Ext.extend(Ext.form.FormPanel,{
 			    forceSelection: true,
 			    allowBlank: false,
 			    store: this.supplierStore
+			},
+			{
+			    xtype: 'combo',
+			    fieldLabel: '工序',
+			    anchor: '90%',
+			    name: 'operId',
+			    hiddenName: 'operId',
+			    valueField: 'id',
+			    displayField: 'name',
+			    emptyText: '请选择工序...',
+			    mode: 'remote',                
+			    triggerAction: 'all',
+			    forceSelection: true,
+			    allowBlank: false,
+			    store: this.operStore
 			},
 			{
 			    xtype: 'combo',
