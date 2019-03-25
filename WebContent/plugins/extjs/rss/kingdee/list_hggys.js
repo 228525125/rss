@@ -17,7 +17,7 @@ HggysListPanel = Ext.extend(Ext.Panel, {
 		if(!this.win||null==this.win){
 			this.win = new Ext.Window({
 				width:360,
-				height:200,
+				height:240,
 				layout:'fit',
 				buttonAlign:"center",
 				title:'编辑供应商信息',
@@ -247,6 +247,13 @@ HggysListPanel = Ext.extend(Ext.Panel, {
                             },
                             {
                                 xtype: 'gridcolumn',
+                                header: '工序',
+                                sortable: false,
+                                width: 200,
+                                dataIndex: 'operName'
+                            },
+                            {
+                                xtype: 'gridcolumn',
                                 header: '供应商',
                                 sortable: false,
                                 width: 200,
@@ -290,7 +297,7 @@ HggysListPanel = Ext.extend(Ext.Panel, {
                             	{
                                     xtype: 'button',
                                     text: '添加',
-                                    pressed: true,           
+                                    //pressed: true,           
                                     handler: this.add_gys,
                                     scope:this
                                 },
@@ -301,7 +308,7 @@ HggysListPanel = Ext.extend(Ext.Panel, {
                                 {
                                     xtype: 'button',
                                     text: '修改',
-                                    pressed: true,           
+                                    //pressed: true,           
                                     handler: this.edit_gys,
                                     scope:this
                                 },
@@ -316,7 +323,7 @@ HggysListPanel = Ext.extend(Ext.Panel, {
                                 {
                                     xtype: 'button',
                                     text: '刷新',
-                                    pressed: true,           
+                                    //pressed: true,           
                                     handler: function(){this.store.reload();},
                                     scope:this
                                 },
@@ -324,8 +331,20 @@ HggysListPanel = Ext.extend(Ext.Panel, {
                                     xtype: 'spacer',
                                     width: 3
                                 },'-',{
+                	            	text: '登录',
+                	            	//pressed: true,
+                	            	handler: function(){
+                	            		var panel = Ext.getCmp('daibanshiyipanel');				
+                	    	            var win = new LoginWindow({dbsy:panel});
+                	    	            win.show();
+                	            	},
+                	            	scope: this
+                	            },{
+                                    xtype: 'spacer',
+                                    width: 3
+                                },{
                 	            	text: '审核',
-                	            	pressed: true,
+                	            	//pressed: true,
                 	            	handler: function(){
                 	            		var jsonBegin = '{"rows":[';
                 				    	var jsonEnd = ']}';
@@ -359,10 +378,9 @@ HggysListPanel = Ext.extend(Ext.Panel, {
                 				    			var responseArray = Ext.util.JSON.decode(response.responseText); 
                 				    			var resp = responseArray.result[0];
                 				    			 if(resp.success==true){
-                				    				 if(resp.msg)
-                				    					 Ext.Msg.alert('提示','处理完毕!',function(){
-                				    						 this.store.load();
-                				    					 },this);
+                				    				 Ext.Msg.alert('提示',resp.msg,function(){
+            				    						 this.store.load();
+            				    					 },this);
                 				    			 }else{
                 				    				 Ext.Msg.alert('提示','服务器没有响应，请稍后再试！');
                 				    			 }
@@ -376,7 +394,7 @@ HggysListPanel = Ext.extend(Ext.Panel, {
                                     width: 3
                                 },{
                 	            	text: '反审核',
-                	            	pressed: true,
+                	            	//pressed: true,
                 	            	handler: function(){
                 	            		var jsonBegin = '{"rows":[';
                 				    	var jsonEnd = ']}';
@@ -410,10 +428,9 @@ HggysListPanel = Ext.extend(Ext.Panel, {
                 				    			var responseArray = Ext.util.JSON.decode(response.responseText); 
                 				    			var resp = responseArray.result[0];
                 				    			 if(resp.success==true){
-                				    				 if(resp.msg)
-                				    					 Ext.Msg.alert('提示','处理完毕!',function(){
-                				    						 this.store.load();
-                				    					 },this);
+                				    				 Ext.Msg.alert('提示',resp.msg,function(){
+            				    						 this.store.load();
+            				    					 },this);
                 				    			 }else{
                 				    				 Ext.Msg.alert('提示','服务器没有响应，请稍后再试！');
                 				    			 }

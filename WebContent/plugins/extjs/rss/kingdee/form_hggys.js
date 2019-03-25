@@ -1,6 +1,6 @@
 HggysFormPanel = Ext.extend(Ext.form.FormPanel,{
 	width: 343,
-    height: 325,
+    height: 355,
     padding: 10,
     labelWidth: 70,
     labelAlign: 'right',

@@ -3,6 +3,7 @@ package org.cx.rss.mvc;
 import static org.jmesa.facade.TableFacadeFactory.createTableFacade;
 import static org.jmesa.limit.ExportType.JEXCEL;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -12,12 +13,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.fileupload.FileItem;
 import org.cx.rss.service.IKingdeeService;
 import org.cx.rss.util.Util;
 import org.jmesa.facade.TableFacade;
@@ -2166,27 +2170,34 @@ public class KingdeeAction extends BaseAction {
 	}
 	
 	public Page check_hggys(WebForm form) {
-		Object resp = form.get("resp");
-		JSONParser parser = new JSONParser();
-		JSONObject obj;
-		try {
-			obj = (JSONObject) parser.parse(resp.toString());
-			JSONArray list = (JSONArray) obj.get("rows");
-			for(Object jboj : list){
-				JSONObject row = (JSONObject) jboj;
-				try{
-					Integer id = new Integer(CommUtil.null2String(row.get("id")));
-					Boolean checked = new Boolean(CommUtil.null2String(row.get("checked")));
-					kingdeeService.check_hggys(id, checked);
-				} catch(java.lang.NumberFormatException e){
-					continue;
+		if((null!=getUser() && "0117".equals(getUser().getAccount())) 
+		|| (null!=getUser() && "chenxian".equals(getUser().getAccount()))){
+					
+			Object resp = form.get("resp");
+			JSONParser parser = new JSONParser();
+			JSONObject obj;
+			try {
+				obj = (JSONObject) parser.parse(resp.toString());
+				JSONArray list = (JSONArray) obj.get("rows");
+				for(Object jboj : list){
+					JSONObject row = (JSONObject) jboj;
+					try{
+						Integer id = new Integer(CommUtil.null2String(row.get("id")));
+						Boolean checked = new Boolean(CommUtil.null2String(row.get("checked")));
+						kingdeeService.check_hggys(id, checked);
+					} catch(java.lang.NumberFormatException e){
+						continue;
+					}
 				}
+			} catch (org.json.simple.parser.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (org.json.simple.parser.ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return success2(form, true, "处理完毕！");
+			
+		}else{
+			return success2(form, true, "该操作需要先登录！");
 		}
-		return success2(form, true, "处理完毕！");
 	}
 	
 	public Page tree_item(WebForm form){

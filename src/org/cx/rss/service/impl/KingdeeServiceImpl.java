@@ -674,28 +674,31 @@ public class KingdeeServiceImpl implements IKingdeeService {
 	
 	public IPageList list_item(QueryObject qo, String code) {
 		String sql = "select FItemID as 'id', FNumber as 'code', FName as 'name' from t_ICItem where FDeleted=0 and FNumber like '"+code+"%' order by FNumber";
-		String total = "select count(1) from t_ICItem where FDeleted=0";
+		String total = "select count(1) from t_ICItem where FDeleted=0 and FNumber like '"+code+"%' ";
 		return QueryUtil.query(qo, total, sql, true, jdbcDao);
 	}
 	
 	public IPageList list_supplier(QueryObject qo, String name) {
 		// TODO Auto-generated method stub
 		String sql = "select FItemID as 'id',FNumber as 'code',FName as 'name' from t_supplier where FDeleted=0 and FName like '%"+name+"%'";
-		String total = "select count(1) from t_supplier where FDeleted=0";
+		String total = "select count(1) from t_supplier where FDeleted=0 and FName like '%"+name+"%'";
 		return QueryUtil.query(qo, total, sql, true, jdbcDao);
 	}
 	
 	public IPageList list_oper(QueryObject qo, String name) {
 		// TODO Auto-generated method stub
-		/
-		return null;
+		String sql = "select FInterID as 'id',FID as 'code',FName as 'name' from t_SubMessage where FTypeID=61 and FName like '%"+name+"%'";
+		String total = "select count(1) from t_SubMessage where FTypeID=61 and FName like '%"+name+"%'";
+		return QueryUtil.query(qo, total, sql, true, jdbcDao);
 	}
 	
 	public IPageList list_hggys(QueryObject qo, Integer itemId) {
 		// TODO Auto-generated method stub
-		String sql = "select a.id,b.FName as 'itemName',b.FItemID as 'itemId',a.supplierId,c.FNumber as 'code',c.FName as 'name',a.checked,a.date,a.[default] from rss.dbo.supplier_check a "
+		String sql = "select a.id,b.FName as 'itemName',b.FItemID as 'itemId',c.FItemID as 'supplierId',c.FNumber as 'code',c.FName as 'name',a.checked,a.date,a.[default],d.FInterID as 'operId',d.FName as 'operName' "
+				+ "from rss.dbo.supplier_check a "
 				+ "left join t_ICItem b on a.itemId=b.FItemID "
 				+ "left join t_supplier c on a.supplierId=c.FItemID "
+				+ "left join t_SubMessage d on d.FTypeID=61 and a.operId=d.FInterID "
 				+ "where a.itemID="+itemId;
 		String total = "select count(1) from rss.dbo.supplier_check where itemID="+itemId;
 		return QueryUtil.query(qo, total, sql, true, jdbcDao);
