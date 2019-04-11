@@ -6,13 +6,76 @@ WwjysqdListPanel = Ext.extend(Ext.Panel, {
     border: false,
     closable: true,
   	autoScroll:true,
+  	createForm:function(){
+		if(!this.fp||null==this.fp){
+			this.fp = new WwjysqdFormPanel();
+		}
+		if(!this.win||null==this.win){
+			this.win = new Ext.Window({
+				width:360,
+				height:240,
+				layout:'fit',
+				buttonAlign:"center",
+				title:'编辑委外检验申请单信息',
+				modal:true,
+				shadow:true,
+				closeAction:"close",
+				items:[this.fp],
+				buttons:[{text:"保存",
+						  handler:function(){
+							this.fp.form.submit({
+								waitMsg:'正在保存。。。',
+						        url:'kingdee.do?cmd=update_wwjysqd',
+						        method:'POST',
+						        success:function(form,action){
+						        	if(null!=action.result&&action.result.msg)
+							        	Ext.Msg.alert('提示',action.result.msg,function(){
+							        		this.win.close();
+									        this.store.reload(); 
+							        	},this);
+									else{
+								        this.win.close();
+								        this.store.reload();
+									}
+						        },
+						        scope:this
+							});	
+						  },
+						  scope:this},
+						  {text:"清空",
+						   handler:function(){
+							  this.fp.form.reset();
+						   },
+						   scope:this},
+						  {text:"取消",
+						   handler:function(){
+							  this.win.close();  
+						   },
+						   scope:this}
+						 ]
+			});
+			this.win.on('close',function(){this.fp=null;this.win=null;},this);
+		}
+	},
+	edit_sqd:function(){
+		var record=this.gp.getSelectionModel().getSelected();
+		if(!record){
+			Ext.Msg.alert("提示","请先选择要编辑的行!");
+			return;
+		}
+			
+		this.createForm();
+		this.win.show();
+		this.fp.form.loadRecord(record);
+		
+	},
     initComponent: function() {
 		//统计报表数据
 		this.store = new Ext.data.JsonStore({
 			url:'kingdee.do?cmd=list_wwjysqd',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:['FStatus','FInterID','FEntryID','FBillNo','FSourceBillNo','FDate','cpdm','cpmc','cpgg','jldw','fssl','wlph','jgdw','hgsl','jssl','remark','jyfs','zcsl'],
+			fields:['FStatus','FInterID','FEntryID','FBillNo','FSourceBillNo','FDate','cpdm','cpmc','cpgg','jldw','fssl','wlph','jgdw','hgsl','jssl','remark','jyfs','zcsl','dj'],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:pgSize}
 	    });
@@ -64,6 +127,7 @@ WwjysqdListPanel = Ext.extend(Ext.Panel, {
                 items: [
                     {
                         xtype: 'grid',
+                        id: 'wwjysqdgrid',
                         region: 'center',
                         margins: '3 3 3 3',
                         view: new Ext.ux.grid.LockingGridView(),
@@ -80,6 +144,12 @@ WwjysqdListPanel = Ext.extend(Ext.Panel, {
         	            	},
         	            	scope: this
         	            },'-',{
+                            xtype: 'button',
+                            text: '修改',
+                            //pressed: true,           
+                            handler: this.edit_sqd,
+                            scope:this
+                        },'-',{
         	            	text: '导出',
         	            	handler: function(){	        	            	        	            			        	            	
         	            		var begin = '&begin='+this.beginfield.getValue().format('Y-m-d');
@@ -190,6 +260,13 @@ WwjysqdListPanel = Ext.extend(Ext.Panel, {
                                 dataIndex: 'fssl'
                             },{
                                 xtype: 'gridcolumn',
+                                header: '单价',
+                                sortable: true,
+                                resizable: true,
+                                width: 60,                                
+                                dataIndex: 'dj'
+                            },{
+                                xtype: 'gridcolumn',
                                 header: '转出数量',
                                 sortable: true,
                                 resizable: true,
@@ -230,5 +307,9 @@ WwjysqdListPanel = Ext.extend(Ext.Panel, {
             }
         ];
         WwjysqdListPanel.superclass.initComponent.call(this);
+        
+        this.on('render',function(t){        	
+        	this.gp = Ext.getCmp('wwjysqdgrid');
+		},this);
     }
 });

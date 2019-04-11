@@ -1,5 +1,6 @@
 package org.cx.rss.service.impl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -255,6 +256,12 @@ public class KingdeeServiceImpl implements IKingdeeService {
 		String sql = "execute list_wwjysqd '"+query+"','"+begin+"','"+end+"','"+qo.getOrderBy()+"','"+qo.getOrderType()+"'"; 
 		String totalsql = "execute list_wwjysqd_count '"+query+"','"+begin+"','"+end+"','"+qo.getOrderBy()+"','"+qo.getOrderType()+"'";
 		return QueryUtil.query(qo, totalsql, sql, true, jdbcDao);
+	}
+	
+	public void update_wwjysqd(Integer fid, BigDecimal dj) {
+		// TODO Auto-generated method stub
+		String sql = "update wwzc_wwjysqd set dj=? where FID=?";
+		rssDao.update(sql, new Object[]{dj,fid});
 	}
 	
 	public IPageList list_wwjyjsl(QueryObject qo, String begin, String end, String status) {

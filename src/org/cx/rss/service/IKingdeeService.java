@@ -1,5 +1,6 @@
 package org.cx.rss.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -294,6 +295,8 @@ public interface IKingdeeService {
 	 * @return
 	 */
 	public IPageList list_wwjysqd(QueryObject qo, String query, String begin, String end);
+	
+	public void update_wwjysqd(Integer fid, BigDecimal dj);
 	
 	/**
 	 * 委外工序检验及时率明细

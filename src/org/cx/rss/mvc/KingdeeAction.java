@@ -5,6 +5,7 @@ import static org.jmesa.limit.ExportType.JEXCEL;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -548,6 +549,16 @@ public class KingdeeAction extends BaseAction {
 		IPageList pageList = kingdeeService.list_wwjysqd(qo,query,begin,end);
 		form.jsonResult(pageList);
 		return Page.JSONPage;
+	}
+	
+	public Page update_wwjysqd(WebForm form){
+		Object FBillNo = form.get("FBillNo");
+		if(null!=FBillNo && !"".equals(FBillNo.toString())){
+			Integer fid = new Integer(FBillNo.toString());
+			BigDecimal dj = new BigDecimal(form.get("dj").toString());
+			kingdeeService.update_wwjysqd(fid, dj);
+		}
+		return success(form, true, null, "保存成功！");
 	}
 	
 	public void export_wwjysqd(WebForm form) {

@@ -12,7 +12,7 @@ WwjywzdjListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_wwjywzdj',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:['djbh','djrq','jyrq','dhrq','wldm','wlmc','wlgg','wlth','jldw','fssl'],
+			fields:['djbh','djrq','jhrq','dhrq','cpdm','cpmc','cpgg','cpth','jldw','djsl','fssl','sjsl','jysl','hgsl','jyfs','jgdw','jssl'],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:2000}
 	    });
@@ -48,74 +48,107 @@ WwjywzdjListPanel = Ext.extend(Ext.Panel, {
                             {
                                 xtype: 'gridcolumn',
                                 header: '单据编号',
-                                sortable: true,
                                 resizable: true,
                                 width: 100,
                                 dataIndex: 'djbh'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '申请日期',
-                                sortable: true,
                                 resizable: true,
                                 width: 80,
                                 dataIndex: 'djrq'
                             },{
                                 xtype: 'gridcolumn',
-                                header: '检验日期',
-                                sortable: true,
+                                header: '交货日期',
                                 resizable: true,
                                 width: 80,
-                                dataIndex: 'jyrq'
+                                dataIndex: 'jhrq'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '检验方式',
+                                resizable: true,
+                                width: 40,
+                                dataIndex: 'jyfs'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '物料代码',
-                                sortable: true,
                                 resizable: true,
                                 width: 80,
-                                dataIndex: 'wldm'
+                                dataIndex: 'cpdm'
                             },
                             {
                                 xtype: 'gridcolumn',
                                 header: '物料名称',
-                                sortable: true,
                                 resizable: true,
                                 width: 150,
                                 renderer:function(value,metadata,record){
 	          		    	  		return value;
 	          		      		},
-                                dataIndex: 'wlmc'
+                                dataIndex: 'cpmc'
                             },
                             {
                                 xtype: 'gridcolumn',
                                 header: '图号',
-                                sortable: true,
                                 resizable: true,
                                 width: 80,
-                                dataIndex: 'wlth'
+                                dataIndex: 'cpth'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '规格',
-                                sortable: true,
                                 resizable: true,
                                 width: 80,
-                                dataIndex: 'wlgg'
+                                dataIndex: 'cpgg'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '单位',
-                                sortable: true,
                                 resizable: true,
                                 width: 40,
                                 dataIndex: 'jldw'
                             },{
                                 xtype: 'gridcolumn',
-                                header: '数量',
-                                sortable: true,
+                                header: '待检数量',
                                 resizable: true,
                                 width: 60,
-                                dataIndex: 'fssl',
+                                dataIndex: 'djsl',
                                 renderer:function(value,metadata,record){	                            	
 	                        		return value;
 	                        	}
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '加工单位',
+                                resizable: true,
+                                width: 40,
+                                dataIndex: 'jgdw'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '转出数量',
+                                resizable: true,
+                                width: 40,
+                                dataIndex: 'fssl'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '送检数量',
+                                resizable: true,
+                                width: 40,
+                                dataIndex: 'sjsl'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '检验数量',
+                                resizable: true,
+                                width: 40,
+                                dataIndex: 'jysl'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '合格数量',
+                                resizable: true,
+                                width: 40,
+                                dataIndex: 'hgsl'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '接收数量',
+                                resizable: true,
+                                width: 40,
+                                dataIndex: 'jssl'
                             }
                         ])
                     }
