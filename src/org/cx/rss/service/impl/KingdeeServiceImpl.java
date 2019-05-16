@@ -687,14 +687,14 @@ public class KingdeeServiceImpl implements IKingdeeService {
 	
 	public IPageList list_supplier(QueryObject qo, String name) {
 		// TODO Auto-generated method stub
-		String sql = "select FItemID as 'id',FNumber as 'code',FName as 'name' from t_supplier where FDeleted=0 and FName like '%"+name+"%'";
+		String sql = "select FItemID as 'id',FNumber as 'code',FName as 'name' from t_supplier where FDeleted=0 and FName like '%"+name+"%' order by FName";
 		String total = "select count(1) from t_supplier where FDeleted=0 and FName like '%"+name+"%'";
 		return QueryUtil.query(qo, total, sql, true, jdbcDao);
 	}
 	
 	public IPageList list_oper(QueryObject qo, String name) {
 		// TODO Auto-generated method stub
-		String sql = "select FInterID as 'id',FID as 'code',FName as 'name' from t_SubMessage where FTypeID=61 and FName like '%"+name+"%'";
+		String sql = "select FInterID as 'id',FID as 'code',FName as 'name' from t_SubMessage where FTypeID=61 and FName like '%"+name+"%' order by FName";
 		String total = "select count(1) from t_SubMessage where FTypeID=61 and FName like '%"+name+"%'";
 		return QueryUtil.query(qo, total, sql, true, jdbcDao);
 	}
