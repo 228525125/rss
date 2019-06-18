@@ -12,7 +12,7 @@ WwzcListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_wwzc',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:['FStatus','FInterID','FEntryID','FBillNo','FSourceBillNo','FDate','cpdm','cpmc','cpgg','jldw','fssl','wlph','jhrq','jgdw','sjsl','hgsl','jssl','jyfs'],
+			fields:['FStatus','FInterID','FEntryID','FBillNo','FSourceBillNo','FDate','cpdm','cpmc','cpgg','cpth','jldw','fssl','wlph','jhrq','jgdw','sjsl','hgsl','jssl','jyfs'],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:pgSize}
 	    });
@@ -308,6 +308,13 @@ WwzcListPanel = Ext.extend(Ext.Panel, {
                                 resizable: true,
                                 width: 80,
                                 dataIndex: 'cpgg'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '图号',
+                                sortable: true,
+                                resizable: true,
+                                width: 80,
+                                dataIndex: 'cpth'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '单位',
