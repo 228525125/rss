@@ -1145,18 +1145,17 @@ public class KingdeeAction extends BaseAction {
 		return Page.JSONPage;
 	}
 	
+	/*String begin = "";
+	String end = ""+Calendar.getInstance().get(Calendar.YEAR)+"-"+(Calendar.getInstance().get(Calendar.MONTH))+"-"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	try {
+		begin = new Timestamp(df.parse(Calendar.getInstance().get(Calendar.YEAR)+"-"+(Calendar.getInstance().get(Calendar.MONTH))+"-01").getTime()).toString().substring(0,10);			
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}*/
 	public void caigou(WebForm form){
-		/*String begin = "";
-		String end = ""+Calendar.getInstance().get(Calendar.YEAR)+"-"+(Calendar.getInstance().get(Calendar.MONTH))+"-"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			begin = new Timestamp(df.parse(Calendar.getInstance().get(Calendar.YEAR)+"-"+(Calendar.getInstance().get(Calendar.MONTH))+"-01").getTime()).toString().substring(0,10);			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		ServletContext sc = ActionContext.getContext().getSession().getServletContext();
+		/*ServletContext sc = ActionContext.getContext().getSession().getServletContext();
 		String begin = sc.getInitParameter("begin");
 		String end = sc.getInitParameter("end");
 		form.addResult("begin", begin);
@@ -1170,22 +1169,22 @@ public class KingdeeAction extends BaseAction {
 		form.addPo(kingdeeService.count_wxhgl(begin, end));
 		
 		form.addResult("wwjss", kingdeeService.count_task_wwjs("2013-01-01", "2099-12-31"));
-		form.addResult("scrwwjsyja", kingdeeService.count_scrw_tqja());
+		form.addResult("scrwwjsyja", kingdeeService.count_scrw_tqja());*/
 	}
 	
 	public void zhizao(WebForm form){		
-		ServletContext sc = ActionContext.getContext().getSession().getServletContext();
+		/*ServletContext sc = ActionContext.getContext().getSession().getServletContext();
 		String begin = sc.getInitParameter("begin");
 		String end = sc.getInitParameter("end");
 		
 		form.addPo(kingdeeService.count_scrwjsl(begin, end));
 		form.addPo(kingdeeService.count_wjarwd(begin, end));
 		form.addPo(kingdeeService.count_cphgl(begin, end));
-		
+		*/
 	}
 	
 	public void pinzhi(WebForm form){		
-		ServletContext sc = ActionContext.getContext().getSession().getServletContext();
+		/*ServletContext sc = ActionContext.getContext().getSession().getServletContext();
 		String begin = sc.getInitParameter("begin");
 		String end = sc.getInitParameter("end");
 		
@@ -1193,26 +1192,24 @@ public class KingdeeAction extends BaseAction {
 		form.addPo(kingdeeService.count_wgjyjsl(begin, end));
 		form.addPo(kingdeeService.count_wwjyjsl(begin, end));
 		
-		/*
-		 * 上面方法的wwtoday值有误，这里重新计算
-		 */
+		
+		//上面方法的wwtoday值有误，这里重新计算
 		QueryObject qo = form.toPo(QueryObject.class);
 		IPageList pageList = kingdeeService.list_wwjywzdj(qo, begin, end);
 		form.addResult("wwtoday1", pageList.getRowCount());
 		
-		/*
-		 * 添加外协送检异常单据数
-		 */
-		form.addResult("wxsjycs", kingdeeService.count_wxsjyc(begin, end));
+		
+		// 添加外协送检异常单据数
+		form.addResult("wxsjycs", kingdeeService.count_wxsjyc(begin, end));*/
 	}
 	
 	public void xiaoshou(WebForm form){		
-		ServletContext sc = ActionContext.getContext().getSession().getServletContext();
+		/*ServletContext sc = ActionContext.getContext().getSession().getServletContext();
 		String begin = sc.getInitParameter("begin");
 		String end = sc.getInitParameter("end");
 		
 		form.addPo(kingdeeService.count_ddjsl(begin, end));	
-		form.addPo(kingdeeService.count_wdjdd(begin, end));
+		form.addPo(kingdeeService.count_wdjdd(begin, end));*/
 	} 
 	
 	public Page list_wgjsl(WebForm form){
@@ -2223,7 +2220,7 @@ public class KingdeeAction extends BaseAction {
 	
 	private void export_aqkc(TableFacade tableFacade) {
 		// TODO Auto-generated method stub
-		tableFacade.setColumnProperties("wldm","wlmc","wlgg","cpth","jldw","cklj","yckl","aqkc","aqkcje","jcsl","zgkc","zgkcje","zxdhl","cgzq","hsdj","ztsl","cksl");
+		tableFacade.setColumnProperties("wldm","wlmc","wlgg","cpth","jldw","cklj","yckl","aqkc","aqkcje","jcsl","zgkc","zgkcje","zxdhl","cgzq","hsdj","ztsl","cksl","mx");
 		Table table = tableFacade.getTable();
 		Row row = table.getRow();
 		row.setUniqueProperty("wldm");
@@ -2279,7 +2276,8 @@ public class KingdeeAction extends BaseAction {
 		Column hc17 = row.getColumn("cksl");
 		hc17.setTitle("预计出库量");
 		
-		
+		Column hc18 = row.getColumn("mx");
+		hc17.setTitle("单月最高消耗量");		
 		
 		tableFacade.render();
 	}

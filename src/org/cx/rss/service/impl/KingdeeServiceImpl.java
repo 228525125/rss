@@ -23,6 +23,8 @@ import com.easyjf.web.tools.IPageList;
 @Service("kingdeeService")
 public class KingdeeServiceImpl implements IKingdeeService {
 
+	public static String totalsql = "exec  total_sql";
+	
 	private static final QueryOrderBy orderby = new DefaultOrderBy();
 	
 	@Autowired
@@ -604,7 +606,7 @@ public class KingdeeServiceImpl implements IKingdeeService {
 			String status) {
 		// TODO Auto-generated method stub
 		String sql = "execute list_wgwzdj '"+begin+"','"+end+"','"+status+"'"; 
-		String totalsql = "execute list_wgwzdj_count '"+begin+"','"+end+"','"+status+"'";
+		//String totalsql = TotalSql;
 		return QueryUtil.query(qo, totalsql, sql, true, jdbcDao);
 	}
 	
@@ -633,7 +635,7 @@ public class KingdeeServiceImpl implements IKingdeeService {
 			String status) {
 		// TODO Auto-generated method stub
 		String sql = "execute list_wxwzdj '"+begin+"','"+end+"','"+status+"'"; 
-		String totalsql = "execute list_wxwzdj_count '"+begin+"','"+end+"','"+status+"'";
+		//String totalsql = TotalSql;//"execute list_wxwzdj_count '"+begin+"','"+end+"','"+status+"'";
 		return QueryUtil.query(qo, totalsql, sql, true, jdbcDao);
 	}
 	
