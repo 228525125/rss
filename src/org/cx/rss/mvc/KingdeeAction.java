@@ -2277,7 +2277,7 @@ public class KingdeeAction extends BaseAction {
 		hc17.setTitle("预计出库量");
 		
 		Column hc18 = row.getColumn("mx");
-		hc17.setTitle("单月最高消耗量");		
+		hc18.setTitle("单月最高消耗量");		
 		
 		tableFacade.render();
 	}
