@@ -12,7 +12,7 @@ WwzcListPanel = Ext.extend(Ext.Panel, {
 			url:'kingdee.do?cmd=list_wwzc',
 			root: 'result',
 			totalProperty:"rowCount",
-			fields:['FStatus','FInterID','FEntryID','FBillNo','FSourceBillNo','FDate','cpdm','cpmc','cpgg','cpth','jldw','fssl','wlph','jhrq','jgdw','sjsl','hgsl','jssl','jyfs'],
+			fields:['FStatus','FInterID','FEntryID','FBillNo','FSourceBillNo','FDate','cpdm','cpmc','cpgg','cpth','jldw','fssl','wlph','jhrq','jgdw','sjsl','hgsl','jssl','jyfs','gxmc'],
 	  		remoteSort:true,
 	  		baseParams:{pageSize:pgSize}
 	    });
@@ -252,6 +252,13 @@ WwzcListPanel = Ext.extend(Ext.Panel, {
                                 resizable: true,
                                 width: 80,
                                 dataIndex: 'FDate'
+                            },{
+                                xtype: 'gridcolumn',
+                                header: '工序名称',
+                                sortable: true,
+                                resizable: true,
+                                width: 80,
+                                dataIndex: 'gxmc'
                             },{
                                 xtype: 'gridcolumn',
                                 header: '检验方式',
